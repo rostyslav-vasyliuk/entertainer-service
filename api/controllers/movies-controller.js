@@ -40,9 +40,11 @@ const getByGenres = async (req, res) => {
 
 const getTopTen = async (req, res) => {
   try {
+    const page = req.query.page;
     const data = await axios.get(
-      `${BASE_URL}/trending/movie/week?api_key=${process.env.API_KEY}`
+      `${BASE_URL}/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=2019-01-01`
     );
+
     res.send(data.data);
   } catch (err) {
     res.status(500).json(err);
