@@ -14,6 +14,20 @@ const getDetails = async (req, res) => {
   }
 };
 
+const getRecommendations = async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    const data = await axios.get(
+      `${BASE_URL}/movie/${id}/recommendations?api_key=${process.env.API_KEY}&language=en-US&page=1`
+    );
+
+    res.send(data.data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 const getSimilar = async (req, res) => {
   try {
     const id = req.params.id;
@@ -29,8 +43,9 @@ const getSimilar = async (req, res) => {
 const getByGenres = async (req, res) => {
   try {
     const genre_id = req.params.genre_id;
+    const page = req.query.page;
     const data = await axios.get(
-      `${BASE_URL}/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genre_id}`
+      `${BASE_URL}/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genre_id}&page=${page}`
     );
     res.send(data.data);
   } catch (err) {
@@ -99,6 +114,7 @@ const searchMovie = async (req, res) => {
 module.exports = {
   getDetails,
   getSimilar,
+  getRecommendations,
   getByGenres,
   getTopTen,
   getUpcoming,

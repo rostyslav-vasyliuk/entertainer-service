@@ -31,6 +31,7 @@ const getSeason = async (req, res) => {
 const getTopTen = async (req, res) => {
   try {
     const page = req.query.page;
+    console.log(page)
     const data = await axios.get(
       `${BASE_URL}/discover/tv?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=2019-01-01`
     );
@@ -44,9 +45,23 @@ const getTopTen = async (req, res) => {
 const getRecomendations = async (req, res) => {
   try {
     const id = req.query.id;
-    console.log(id)
+
     const data = await axios.get(
       `${BASE_URL}/tv/${id}/recommendations?api_key=${process.env.API_KEY}&language=en-US&page=1`
+    );
+
+    res.send(data.data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+const getTopByGenre = async (req, res) => {
+  try {
+    const genre = req.params.genre;
+    const page =  req.query.page;
+    const data = await axios.get(
+      `${BASE_URL}/discover/tv?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genre}`
     );
 
     res.send(data.data);
@@ -59,5 +74,6 @@ module.exports = {
   getDetails,
   getTopTen,
   getSeason,
-  getRecomendations
+  getRecomendations,
+  getTopByGenre
 };

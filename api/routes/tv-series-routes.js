@@ -10,4 +10,7 @@ router.get('/get-top-ten', tvSeriesController.getTopTen);
 router.get('/season/details', tvSeriesController.getSeason);
 
 router.get('/recommendations', tvSeriesController.getRecomendations);
+
+router.get('/get-top-by-genre/:genre', tvSeriesController.getTopByGenre);
+
 module.exports = router;

@@ -5,9 +5,11 @@ const router = new express.Router();
 
 router.get('/details/:id', movieController.getDetails);
 
+router.get('/recommendations', movieController.getRecommendations);
+
 router.get('/get-similar/:id', movieController.getSimilar);
 
-router.get('/get-by-genres/:genre_id', movieController.getByGenres);
+router.get('/get-top-by-genre/:genre_id', movieController.getByGenres);
 
 router.get('/get-top-ten', movieController.getTopTen);
 
