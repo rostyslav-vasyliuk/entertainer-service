@@ -11,11 +11,13 @@ const mongoose = require('mongoose');
 
 // const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}`;
 
-// mongoose.connect(uri, { useNewUrlParser: true }).then(
-//   () => {
-//     console.log('DB connected')
-//   }
-// );
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-xsa2x.mongodb.net/entertainer?retryWrites=true&w=majority`
+
+mongoose.connect(uri, { useNewUrlParser: true }).then(
+  () => {
+    console.log('DB connected')
+  }
+);
 
 // const directory = path.join(__dirname, '/uploads');
 

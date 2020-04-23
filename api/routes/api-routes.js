@@ -1,11 +1,14 @@
 const express = require('express');
 
+const authRoutes = require('./auth-routes');
 const grabberRoutes = require('./grabber-routes');
 const moviesRouter = require('./movies-routes');
 const tvSeriesRouter = require('./tv-series-routes');
 const actorRouter = require('./actor-routes');
 
 const router = new express.Router();
+
+router.use('/auth', authRoutes)
 
 router.use('/grabber', grabberRoutes);
 

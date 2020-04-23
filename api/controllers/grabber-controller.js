@@ -100,18 +100,44 @@ const planetaKino = async (req, res) => {
   }
 };
 
-module.exports = {
-  planetaKino
-};
-
 const buildYoutubeQuery = (title) => {
-  // console.log(title.split(' '))
-  // let finalString = '';
-
-  // title.split(' ').forEach(element => {
-  //   if (element.length) {
-  //     fin
-  //   }
-  // });
   return encodeURI('+' + title.split(' ').join('+'));
 }
+
+const karabasGrabber = async (req, res) => {
+  try {
+    const karabas_URL = 'https://karabas.com/en/concerts,theatres,business,clubs,seminars,festivals,quest,exhibitions,poetry,sport,stand-up,child/';
+    const eventsList = [];
+
+    const html = await axios.get(`${karabas_URL}`);
+
+    let $ = await cheerio.load(html.data, {
+      withDomLvl1: true,
+      normalizeWhitespace: true,
+      xmlMode: false,
+      decodeEntities: true
+    });
+
+    $('.el-row').each((index, element) => {
+      eventsList.push({});
+      eventsList[eventsList.length - 1]['link'] = $(element).find('.el-info a').attr('href');
+      eventsList[eventsList.length - 1]['title'] = $(element).find('.el-info .el-name').html();
+      eventsList[eventsList.length - 1]['categories'] = $(element).find('.el-info .el-subhead').html();
+      eventsList[eventsList.length - 1]['city'] = $(element).find('.el-info p b').html();
+      eventsList[eventsList.length - 1]['day'] = $(element).find('.el-title .fixed-level-2 em').html();
+      eventsList[eventsList.length - 1]['date'] = $(element).find('.el-title .fixed-level-2 span').html();
+      eventsList[eventsList.length - 1]['img'] = $(element).find('.el-thin a img').attr('src');
+      eventsList[eventsList.length - 1]['price'] = $(element).find('.el-price b').html();
+    });
+
+    res.status(200).send(JSON.stringify(eventsList));
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err);
+  }
+};
+
+module.exports = {
+  planetaKino,
+  karabasGrabber
+};
