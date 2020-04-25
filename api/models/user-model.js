@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
     birthdate: String,
     country: String,
     image: String,
+    forgotPasswordConfirmationCode: String,
     // role: { type: String, enum: ['admin', 'moderator', 'user'], default: 'user'},
     // isBlocked: { type: Boolean, default: false },
   },
