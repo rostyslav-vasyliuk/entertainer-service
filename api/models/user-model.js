@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// var uniqueValidator = require('mongoose-unique-validator');
 const jwt = require('jsonwebtoken');
 
 const minLength = 6;
@@ -16,13 +15,9 @@ const userSchema = new mongoose.Schema(
     country: String,
     image: String,
     forgotPasswordConfirmationCode: String,
-    // role: { type: String, enum: ['admin', 'moderator', 'user'], default: 'user'},
-    // isBlocked: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
-
-// userSchema.plugin(uniqueValidator);
 
 userSchema.methods.generateAuthToken = function (expireTime = '7d') {
   const token = jwt.sign(

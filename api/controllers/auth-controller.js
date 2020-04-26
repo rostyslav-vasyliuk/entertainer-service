@@ -167,15 +167,10 @@ const confirmForgotPasswordCode = async (req, res) => {
       return res.status(400).json({ message: 'Wrong code' })
     }
 
-    user.confirmForgotPasswordCode = null;
+    user.forgotPasswordConfirmationCode = null;
     await user.save();
 
     jwt.verify(forgotPasswordToken, process.env.JWT_KEY);
-    
-    // const confirmationCode = generateConfirmationCode();
-
-    // user.forgotPasswordConfirmationCode = String(confirmationCode);
-    // await user.save();
 
     const token = user.generateAuthToken('5m');
     res.header('reset-password-token', token).json({ message: 'success' }).status(200);
