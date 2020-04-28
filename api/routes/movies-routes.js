@@ -21,4 +21,8 @@ router.get('/get-now-playing', movieController.getNowPlaying);
 
 router.get('/search/:query', movieController.searchMovie);
 
+router.post('/favourite', movieController.addToFavourites);
+
+router.get('/favourite', movieController.getFavourites);
+
 module.exports = router;

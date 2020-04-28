@@ -1,4 +1,6 @@
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models/user-model');
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -8,6 +10,19 @@ const getDetails = async (req, res) => {
     const data = await axios.get(
       `${BASE_URL}/movie/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=credits,videos`
     );
+
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+
+    const user = await User.findById(decoded.id);
+
+    user.visitedMovies.push(id);
+    
+    await user.save();
+
+    const isFavourite = user.favouriteMovies.indexOf(id) === -1 ? false : true;
+    data.data.isFavourite = isFavourite;
+
     res.send(data.data);
   } catch (err) {
     res.status(500).json(err);
@@ -111,6 +126,57 @@ const searchMovie = async (req, res) => {
   }
 }
 
+const addToFavourites = async (req, res) => {
+  try {
+    const id = req.body.id;
+
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+
+    const user = await User.findById(decoded.id);
+
+    const index = user.favouriteMovies.indexOf(id);
+
+    if (index === -1) {
+      user.favouriteMovies.push(id)
+    } else {
+      user.favouriteMovies.splice(index, 1);
+    }
+
+    await user.save();
+
+    const isFavourite = index === -1 ? true : false;
+    res.status(200).send({ isFavourite });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const getFavourites = async (req, res) => {
+  try {
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+
+    const user = await User.findById(decoded.id);
+
+    const favouriteIDs = user.favouriteMovies;
+
+    const urls = favouriteIDs.map((id, index) => {
+      if (index < 20) {
+        return `${BASE_URL}/movie/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=credits,videos`
+      }
+    })
+
+    const responses = await axios.all(urls.map((url) => (axios.get(url))));
+
+    const favouriteMovies = responses.map((elem) => elem.data);
+
+    res.status(200).send({ favouriteMovies });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 module.exports = {
   getDetails,
   getSimilar,
@@ -120,5 +186,7 @@ module.exports = {
   getUpcoming,
   getTopRated,
   getNowPlaying,
-  searchMovie
+  searchMovie,
+  addToFavourites,
+  getFavourites
 };

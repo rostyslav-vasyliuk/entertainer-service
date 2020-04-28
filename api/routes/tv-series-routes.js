@@ -13,4 +13,8 @@ router.get('/recommendations', tvSeriesController.getRecomendations);
 
 router.get('/get-top-by-genre/:genre', tvSeriesController.getTopByGenre);
 
+router.post('/favourite', tvSeriesController.addToFavourites);
+
+router.get('/favourite', tvSeriesController.getFavourites);
+
 module.exports = router;

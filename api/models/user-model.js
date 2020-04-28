@@ -15,6 +15,15 @@ const userSchema = new mongoose.Schema(
     country: String,
     image: String,
     forgotPasswordConfirmationCode: String,
+    favouriteEvents: [String],
+    favouriteMovies: [String],
+    favouriteSeries: [String],
+    favouriteEducation: [String],
+    visitedEvents: [String],
+    visitedMovies: [String],
+    visitedSeries: [String],
+    visitedEducation: [String],
+    actorsVisited: [String]
   },
   { timestamps: true }
 );
