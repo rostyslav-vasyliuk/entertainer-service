@@ -8,4 +8,6 @@ router.get('/planeta-kino', grabberController.planetaKino);
 
 router.get('/karabas', grabberController.karabasGrabber);
 
+router.get('/udemy', grabberController.courseraGrabber);
+
 module.exports = router;

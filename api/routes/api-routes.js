@@ -6,6 +6,7 @@ const moviesRouter = require('./movies-routes');
 const tvSeriesRouter = require('./tv-series-routes');
 const actorRouter = require('./actor-routes');
 const eventsRouter = require('./events-routes');
+const courseRouter = require('./course-routes');
 
 const router = new express.Router();
 
@@ -20,5 +21,7 @@ router.use('/tv-series', tvSeriesRouter);
 router.use('/actor', actorRouter);
 
 router.use('/events', eventsRouter);
+
+router.use('/courses', courseRouter);
 
 module.exports = router;

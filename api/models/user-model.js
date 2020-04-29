@@ -18,11 +18,11 @@ const userSchema = new mongoose.Schema(
     favouriteEvents: [String],
     favouriteMovies: [String],
     favouriteSeries: [String],
-    favouriteEducation: [String],
+    favouriteCourses: [String],
     visitedEvents: [String],
     visitedMovies: [String],
     visitedSeries: [String],
-    visitedEducation: [String],
+    visitedCourses: [String],
     actorsVisited: [String]
   },
   { timestamps: true }

@@ -1,30 +1,31 @@
-const { Event } = require('../models/event-model');
+const { Course } = require('../models/course-model');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/user-model');
 
 const DEFAULT_PER_PAGE = 20;
 
-const getEvents = async (req, res) => {
+const getCourses = async (req, res) => {
   try {
     const page = req.query.page;
-    const category = req.query.category;
+    const type = req.query.type;
     const body = {};
-
-    if (category) {
-      body.categories = category;
+    console.log(type)
+    if (type) {
+      body.type = type;
     }
 
-    const total = await Event.countDocuments(body);
+    const total = await Course.countDocuments(body);
 
-    const events = await Event.find(body)
+    const courses = await Course.find(body)
       .limit(DEFAULT_PER_PAGE)
       .skip(DEFAULT_PER_PAGE * (page - 1))
       .sort({ date: 'asc' });
 
     const pagination = { total, page, perPage: DEFAULT_PER_PAGE };
-
-    res.status(200).send({ events, pagination });
+    console.log(courses.length)
+    res.status(200).send({ courses, pagination });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 };
@@ -33,9 +34,9 @@ const getDetails = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const event = await Event.findById(id);
+    const course = await Course.findById(id);
 
-    const recommendations = await Event.find({ categories: event.categories[0] })
+    const recommendations = await Course.find({ type: course.type })
       .limit(10)
       .sort({ date: 'asc' });
 
@@ -44,13 +45,13 @@ const getDetails = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    user.visitedEvents.push(id);
+    user.visitedCourses.push(id);
 
     await user.save();
 
-    const isFavourite = user.favouriteEvents.indexOf(id) === -1 ? false : true;
+    const isFavourite = user.favouriteCourses.indexOf(id) === -1 ? false : true;
     console.log(isFavourite)
-    res.status(200).send({ event, recommendations, isFavourite });
+    res.status(200).send({ course, recommendations, isFavourite });
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -66,12 +67,12 @@ const addToFavourites = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    const index = user.favouriteEvents.indexOf(id);
+    const index = user.favouriteCourses.indexOf(id);
 
     if (index === -1) {
-      user.favouriteEvents.push(id)
+      user.favouriteCourses.push(id)
     } else {
-      user.favouriteEvents.splice(index, 1);
+      user.favouriteCourses.splice(index, 1);
     }
 
     await user.save();
@@ -92,14 +93,14 @@ const getFavourites = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    const favouriteEventsIds = user.favouriteEvents;
-    console.log(favouriteEventsIds)
-    const total = user.favouriteEvents.length;
-    const events = await Event.find().where('_id').in(favouriteEventsIds).exec()
+    const favouriteIds = user.favouriteCourses;
+    console.log(favouriteIds)
+    const total = user.favouriteCourses.length;
+    const courses = await Course.find().where('_id').in(favouriteIds).exec()
 
     const pagination = { total, page, perPage: DEFAULT_PER_PAGE };
 
-    res.status(200).send({ events, pagination });
+    res.status(200).send({ courses, pagination });
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -108,7 +109,7 @@ const getFavourites = async (req, res) => {
 
 module.exports = {
   getDetails,
-  getEvents,
+  getCourses,
   addToFavourites,
   getFavourites
 };
