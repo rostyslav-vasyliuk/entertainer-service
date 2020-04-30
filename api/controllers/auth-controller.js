@@ -14,7 +14,7 @@ const signUp = async (req, res) => {
       return res.status(422).json({ message: 'Please, fill up all fields!' });
     }
 
-    user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (user) return res.status(422).json({ message: 'User with this email is already exist!' });
 
     user = new User({ firstname, lastname, email, password, gender, birthdate, country });
@@ -55,13 +55,12 @@ const signUp = async (req, res) => {
     });
 
     const token = user.generateAuthToken();
+
+    delete user.password;
     res
       .header('access-token', token)
       .status(200)
-      .json({
-        message: 'User created!',
-        user: { firstname, lastname, email }
-      });
+      .json(user);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -85,7 +84,7 @@ const signIn = async (req, res) => {
     res
       .header('access-token', token)
       .status(200)
-      .json({ user });
+      .send(user);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -157,7 +156,7 @@ const confirmForgotPasswordCode = async (req, res) => {
     const { email, code } = req.body;
     const forgotPasswordToken = req.headers['forgot-password-token'];
     console.log(JSON.stringify(req.headers))
-    
+
     console.log(JSON.stringify(forgotPasswordToken))
 
     let user = await User.findOne({ email });
@@ -187,7 +186,7 @@ const resetPassword = async (req, res) => {
 
     let user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: 'User with this email doesnt exist!' });
-  
+
     jwt.verify(resetToken, process.env.JWT_KEY);
 
     const salt = bcrypt.genSaltSync(10);
