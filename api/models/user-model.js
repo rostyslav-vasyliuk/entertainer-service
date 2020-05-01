@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
     gender: String,
     birthdate: String,
     country: String,
+    countryCode: String,
     image: String,
     forgotPasswordConfirmationCode: String,
     favouriteEvents: [String],

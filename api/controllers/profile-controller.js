@@ -59,7 +59,9 @@ const updateProfile = async (req, res) => {
     const {
       firstname,
       lastname,
+      email,
       country,
+      countryCode,
       birthdate,
       gender
     } = req.body;
@@ -69,15 +71,30 @@ const updateProfile = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    user.firstname= firstname; 
-    user.lastname = lastname;
-    user.country = country;
-    user.birthdate = birthdate;
-    user.gender = gender;
+    if (firstname) {
+      user.firstname = firstname;
+    }
+    if (lastname) {
+      user.lastname = lastname;
+    }
+    if (country) {
+      user.country = country;
+      user.countryCode = countryCode;
+    }
+    if (birthdate) {
+      user.birthdate = birthdate;
+    }
+    if (gender) {
+      user.gender = gender;
+    }
+    if (email) {
+      user.email = email;
+    }
+
 
     await user.save();
 
-    res.status(200).send({ message: 'success' });
+    res.status(200).send(user);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);

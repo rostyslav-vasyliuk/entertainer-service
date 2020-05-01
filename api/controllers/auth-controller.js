@@ -7,17 +7,17 @@ const { generateConfirmationCode } = require('../utils/pseudo-number-generator')
 
 const signUp = async (req, res) => {
   try {
-    const { firstname, lastname, email, password, gender, birthdate, country } = req.body;
+    const { firstname, lastname, email, password, gender, birthdate, country, countryCode } = req.body;
     console.log('got here?')
 
-    if (!email || !password || !firstname || !lastname || !gender || !birthdate || !country) {
+    if (!email || !password || !firstname || !lastname || !gender || !birthdate || !country || !countryCode) {
       return res.status(422).json({ message: 'Please, fill up all fields!' });
     }
 
     let user = await User.findOne({ email });
     if (user) return res.status(422).json({ message: 'User with this email is already exist!' });
 
-    user = new User({ firstname, lastname, email, password, gender, birthdate, country });
+    user = new User({ firstname, lastname, email, password, gender, birthdate, country, countryCode });
     console.log(user)
 
     const salt = bcrypt.genSaltSync(10);
