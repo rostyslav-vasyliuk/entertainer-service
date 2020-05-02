@@ -101,8 +101,23 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const changeUserPhoto = async (req, res) => {
+  try {
+    let user = await User.findById(req.body.id);
+    user.image = req.file.filename;
+
+    await user.save();
+
+    res.status(200).send({ message: 'success' });
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+};
+
 module.exports = {
   sendFeedback,
   changePassword,
-  updateProfile
+  updateProfile,
+  changeUserPhoto
 };
