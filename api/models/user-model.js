@@ -24,7 +24,12 @@ const userSchema = new mongoose.Schema(
     visitedMovies: [String],
     visitedSeries: [String],
     visitedCourses: [String],
-    actorsVisited: [String]
+    actorsVisited: [String],
+    eventsPreferences: [String],
+    moviesPreferences: [String],
+    seriesPreferences: [String],
+    coursesPreferences: [String],
+    order: [Object]
   },
   { timestamps: true }
 );

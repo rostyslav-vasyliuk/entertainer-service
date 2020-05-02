@@ -115,9 +115,51 @@ const changeUserPhoto = async (req, res) => {
   }
 };
 
+const setCategoriesOrder = async (req, res) => {
+  try {
+    const { order } = req.body;
+
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+
+    const user = await User.findById(decoded.id);
+
+    user.order = order;
+
+    await user.save();
+
+    res.status(200).send(user);
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+};
+
+const setPreferences = async (req, res) => {
+  try {
+    const { type, preferences } = req.body;
+
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+
+    const user = await User.findById(decoded.id);
+
+    user[type] = preferences;
+
+    await user.save();
+
+    res.status(200).send(user);
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+};
+
 module.exports = {
   sendFeedback,
   changePassword,
   updateProfile,
-  changeUserPhoto
+  changeUserPhoto,
+  setPreferences,
+  setCategoriesOrder
 };
