@@ -8,6 +8,7 @@ const actorRouter = require('./actor-routes');
 const eventsRouter = require('./events-routes');
 const courseRouter = require('./course-routes');
 const profileRouter = require('./profile-routes');
+const recommendationsRouter = require('./recommendation-routes');
 
 const router = new express.Router();
 
@@ -26,5 +27,7 @@ router.use('/events', eventsRouter);
 router.use('/courses', courseRouter);
 
 router.use('/profile', profileRouter);
+
+router.use('/recommendations', recommendationsRouter);
 
 module.exports = router;
