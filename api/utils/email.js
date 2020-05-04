@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const { getTemplate } = require('../templates/template');
 
 const sendEmail = (toAddress, subject, emailBody) => {
   const smtpTransport = nodemailer.createTransport({
@@ -13,7 +14,7 @@ const sendEmail = (toAddress, subject, emailBody) => {
     to: toAddress,
     from: process.env.GMAIL_MAIL,
     subject: subject,
-    html: emailBody
+    html: getTemplate(subject, emailBody)
   };
 
   smtpTransport.sendMail(mailOptions, function (err, info) {

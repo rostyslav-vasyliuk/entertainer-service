@@ -15,11 +15,11 @@ const sendFeedback = async (req, res) => {
     const user = await User.findById(decoded.id);
     sendEmail(process.env.GMAIL_MAIL, `User feedback: ID=${user._id}`,
       `<div>
-        <h1>Feedback from ID=${user._id}</h1>
+        <h4>Feedback from ID=${user._id}</h4>
         <hr>
-        <h2>Type: ${type}</h2>
-        <h2>Text: ${feedbackText}</h2>
-        <h4>Device: ${JSON.stringify(deviceInfo)}</h4>
+        <h4>Type: ${type}</h4>
+        <h4>Text: ${feedbackText}</h4>
+        <h5>Device: ${JSON.stringify(deviceInfo)}</h5>
       <div>`
     )
     res.status(200).send({ message: 'success' });

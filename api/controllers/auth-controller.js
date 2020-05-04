@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const { User } = require('../models/user-model');
 const nodemailer = require('nodemailer');
 const { generateConfirmationCode } = require('../utils/pseudo-number-generator');
-// const baseURL = process.env.BASE_URL || 'http://localhost:3000';
+const { sendEmail } = require('../utils/email');
 
 const signUp = async (req, res) => {
   try {
@@ -25,34 +25,12 @@ const signUp = async (req, res) => {
 
     await user.save();
 
-    const smtpTransport = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_MAIL,
-        pass: process.env.GMAIL_PASSWORD
-      }
-    });
-
-    const mailOptions = {
-      to: email,
-      from: process.env.GMAIL_MAIL,
-      subject: 'Welcome to Entertainer!',
-      html: `
-      <div>
-        <h1>Hello ${firstname} ${lastname}!</h1>
-        <hr>
-        <h2>We are very happy that you joined Filmify! Have a pleasure using our app!</h2>
-        <h4>If you have some recomendations send your advise to this mail!</h4>
-        <h5>(c)Filmify, 2019</h5>
-      <div>`
-    };
-
-    smtpTransport.sendMail(mailOptions, function (err, info) {
-      if (err)
-        console.log(err)
-      else
-        console.log(info);
-    });
+    sendEmail(email, 'Welcome to Entertainer!', `
+    <div>
+      <h4>Hello ${firstname} ${lastname}!</h4>
+      <hr>
+      <h4>We are very happy that you joined Filmify! Have a pleasure using our app!</h4>
+    <div>` )
 
     const token = user.generateAuthToken();
 
@@ -113,32 +91,12 @@ const forgotPasswordPending = async (req, res) => {
 
     const confirmationCode = generateConfirmationCode();
 
-    const smtpTransport = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_MAIL,
-        pass: process.env.GMAIL_PASSWORD
-      }
-    });
-
-    const mailOptions = {
-      to: email,
-      from: process.env.GMAIL_MAIL,
-      subject: 'Welcome to Entertainer!',
-      html: `
-      <div>
-        <h1>Hello ${user.firstname} ${user.lastname}!</h1>
-        <hr>
-        <h2>Code ${confirmationCode}</h2>
-      <div>`
-    };
-
-    smtpTransport.sendMail(mailOptions, function (err, info) {
-      if (err)
-        console.log(err)
-      else
-        console.log(info);
-    });
+    sendEmail(email, 'Recover your password!', `
+    <div>
+      <h4>Hello ${user.firstname} ${user.lastname}!</h4>
+      <hr>
+      <h4> Your verification code: ${confirmationCode}</h4>
+    <div>` )
 
     user.forgotPasswordConfirmationCode = String(confirmationCode);
     await user.save();
