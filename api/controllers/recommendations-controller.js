@@ -37,8 +37,8 @@ const getRecommendations = async (req, res) => {
       otherSeries.push(seriesOfTheWeek.data.results[i]);
     }
 
-    result.push({ type: 'actor_movies', actor: actorInfo.data, data: movies.data.results });
     result.push({ type: 'movie_of_the_week', data: movieOfTheWeek });
+    result.push({ type: 'actor_movies', actor: actorInfo.data, data: movies.data.results });
     result.push({ type: 'movies_of_the_week', data: otherMovies });
 
     result.push({ type: 'serie_of_the_week', data: serieOfTheWeek });
