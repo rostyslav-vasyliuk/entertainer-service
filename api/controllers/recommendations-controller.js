@@ -4,20 +4,38 @@ const { User } = require('../models/user-model');
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-const getRecommendations = async (req, res) => {
-  try {
-    const token = req.headers['access-token'];
-    const decoded = jwt.decode(token);
+const getMostVisitedActorRecommendations = async (user) => {
+  const mostVisitedActor = getMostPopular(user.actorsVisited, 0);
 
-    const user = await User.findById(decoded.id);
-    const mostVisitedActor = getMostPopular(user.actorsVisited, 0);
-
+  if (mostVisitedActor) {
     const actorInfo = await getActor(mostVisitedActor);
     const movies = await getMoviesWithActor(mostVisitedActor);
+    return { type: 'actor_movies', actor: actorInfo.data, data: movies.data.results };;
+  }
 
-    const result = [];
+  return;
+}
 
-    const moviesOfTheWeek = await getWeekMovies();
+const getSeriesOfTheWeek = async () => {
+  const seriesOfTheWeek = await getWeekTV();
+
+  if (seriesOfTheWeek.data && seriesOfTheWeek.data.results && seriesOfTheWeek.data.results.length) {
+    const serieOfTheWeek = seriesOfTheWeek.data.results[0];
+
+    let otherSeries = [];
+
+    for (let i = 1; i < 11; i++) {
+      otherSeries.push(seriesOfTheWeek.data.results[i]);
+    }
+
+    return [{ type: 'serie_of_the_week', data: serieOfTheWeek }, { type: 'series_of_the_week', data: otherSeries }];
+  }
+}
+
+const getMoviesOfTheWeek = async () => {
+  const moviesOfTheWeek = await getWeekMovies();
+
+  if (moviesOfTheWeek && moviesOfTheWeek.data.results.length) {
 
     const movieOfTheWeek = moviesOfTheWeek.data.results[0];
 
@@ -27,27 +45,54 @@ const getRecommendations = async (req, res) => {
       otherMovies.push(moviesOfTheWeek.data.results[i]);
     }
 
-    const seriesOfTheWeek = await getWeekTV();
+    return [{ type: 'movie_of_the_week', data: movieOfTheWeek }, { type: 'movies_of_the_week', data: otherMovies }]
+  }
+}
 
-    const serieOfTheWeek = seriesOfTheWeek.data.results[0];
-
-    let otherSeries = [];
-
-    for (let i = 1; i < 11; i++) {
-      otherSeries.push(seriesOfTheWeek.data.results[i]);
-    }
-
-    result.push({ type: 'movie_of_the_week', data: movieOfTheWeek });
-    result.push({ type: 'actor_movies', actor: actorInfo.data, data: movies.data.results });
-    result.push({ type: 'movies_of_the_week', data: otherMovies });
-
-    result.push({ type: 'serie_of_the_week', data: serieOfTheWeek });
-    result.push({ type: 'series_of_the_week', data: otherSeries });
-
+const getMoviesPreferencesContentFiltration = async (user) => {
+  if (user.moviesPreferences && user.moviesPreferences.length) {
     const query = buildPreferencesQuery(user.moviesPreferences);
     const preferencesResponse = await axios.get(query);
 
-    result.push({ type: 'movies_preferences', data: preferencesResponse.data.results });
+    return { type: 'movies_preferences', data: preferencesResponse.data.results };
+  }
+}
+
+const getRecommendations = async (req, res) => {
+  try {
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+
+    const user = await User.findById(decoded.id);
+    const result = [];
+
+    const actorsRecommendations = await getMostVisitedActorRecommendations(user);
+
+    if (actorsRecommendations) {
+      result.push(actorsRecommendations);
+    }
+
+    const seriesOfTheWeek = await getSeriesOfTheWeek();
+
+    if (seriesOfTheWeek && seriesOfTheWeek.length === 2) {
+      result.push(seriesOfTheWeek[0]);
+      result.push(seriesOfTheWeek[1]);
+    }
+
+    const moviesOfTheWeek = await getMoviesOfTheWeek();
+    console.log(moviesOfTheWeek)
+    if (moviesOfTheWeek && moviesOfTheWeek.length === 2) {
+      result.push(moviesOfTheWeek[0]);
+      result.push(moviesOfTheWeek[1]);
+    }
+    
+    const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
+
+    if (moviesPreferences) {
+      result.push(moviesPreferences);
+    }
+
+    shuffleArray(result);
 
     res.status(200).send({ result });
   } catch (err) {
@@ -109,3 +154,10 @@ const getMoviesWithActor = (id) => (
 const getActor = (id) => (
   axios.get(`${BASE_URL}/person/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=credits`)
 )
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+}

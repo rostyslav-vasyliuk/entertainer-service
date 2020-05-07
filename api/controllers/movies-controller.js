@@ -18,7 +18,7 @@ const getDetails = async (req, res) => {
 
     user.visitedMovies.push(id);
     
-    await user.save();
+    user.save();
 
     const isFavourite = user.favouriteMovies.indexOf(id) === -1 ? false : true;
     data.data.isFavourite = isFavourite;

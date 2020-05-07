@@ -8,7 +8,7 @@ const { sendEmail } = require('../utils/email');
 const signUp = async (req, res) => {
   try {
     const { firstname, lastname, email, password, gender, birthdate, country, countryCode } = req.body;
-    console.log('got here?')
+    console.log(req.body);
 
     if (!email || !password || !firstname || !lastname || !gender || !birthdate || !country || !countryCode) {
       return res.status(422).json({ message: 'Please, fill up all fields!' });
