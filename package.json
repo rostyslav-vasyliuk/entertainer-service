@@ -6,7 +6,8 @@
   "scripts": {
     "dev-start": "nodemon index.js",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --exit tests",
+    "coverage": "nyc --reporter=html mocha --recursive --exit"
   },
   "author": "",
   "license": "ISC",
@@ -24,9 +25,15 @@
     "nodemailer": "^6.4.5",
     "path": "^0.12.7",
     "pug": "^2.0.4",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sinon": "^9.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.2",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.1",
+    "sinon-express-mock": "^2.2.1"
   }
 }
