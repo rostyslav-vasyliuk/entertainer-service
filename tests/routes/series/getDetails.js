@@ -11,55 +11,62 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 
-describe('Sign handle actor controller', () => {
-  it('Should find actor', () => {
+describe('Sign handle serie controller', () => {
+  it('Should find serie', () => {
     chai.request(server)
-      .get('/api/actor/details/1')
+      .get('/api/tv-series/details/1')
       .end((err, res) => {
         res.should.have.status(200);
       });
   });
-  it('Should find actor', () => {
+  it('Should find serie', () => {
     chai.request(server)
-      .get('/api/actor/details')
-      .end((err, res) => {
-        res.should.have.status(404);
-      });
-  });
-  it('Should find actor', () => {
-    chai.request(server)
-      .get('/api/actor/details/11')
+      .get('/api/tv-series/details/11')
       .set('access-token', 'token')
       .end((err, res) => {
         res.should.have.status(200);
       });
   });
-  it('Should find actor', () => {
+  it('Should find serie', () => {
     chai.request(server)
-      .get('/api/actor/detail/undefined')
+      .get('/api/tv-series/detail/undefined')
       .end((err, res) => {
         res.should.have.status(404);
       });
   });
-  it('Should find actor', () => {
+  it('Should find serie', () => {
     chai.request(server)
-      .get('/api/actor/details/23')
+      .get('/api/tv-series/details/23')
       .end((err, res) => {
         res.should.have.status(200);
       });
   });
-  it('Should find actor', () => {
+  it('Should find serie', () => {
     chai.request(server)
-      .get('/api/actor/details/233')
-      .end((err, res) => {
-        res.should.have.status(200);
-      });
-  });
-  it('Should find actor', () => {
-    chai.request(server)
-      .get('/api/actor/details')
+      .get('/api/tv-series/detail/null')
       .end((err, res) => {
         res.should.have.status(404);
+      });
+  });
+  it('Should find serie', () => {
+    chai.request(server)
+      .get('/api/tv-series/details/233')
+      .end((err, res) => {
+        res.should.have.status(200);
+      });
+  });
+  it('Should find serie', () => {
+    chai.request(server)
+      .get('/api/tv-series/get-top-ten')
+      .end((err, res) => {
+        res.should.have.status(200);
+      });
+  });
+  it('Should find serie', () => {
+    chai.request(server)
+      .get('/api/tv-series/get-top-ten')
+      .end((err, res) => {
+        res.should.have.status(200);
       });
   });
 });

@@ -94,6 +94,16 @@ describe('Sign Up', () => {
         res.body.message.should.eql('Please, fill up all fields!');
       });
   });
+  it('Shold reject, fill up all fields', () => {
+    chai.request(server)
+      .post('/api/auth/sign-up')
+      .end((err, res) => {
+        res.should.have.status(422);
+        res.body.should.be.a('object');
+        res.body.should.have.property('message');
+        res.body.message.should.eql('Please, fill up all fields!');
+      });
+  });
   it('Should reject, username is already exist', () => {
     userFind.returns({});
     chai.request(server)

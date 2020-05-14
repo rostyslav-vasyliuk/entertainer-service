@@ -41,12 +41,4 @@ describe('Validate user', () => {
         res.body.should.be.a('object');
       });
   });
-  it('Shold validate user', () => {
-    chai.request(server)
-      .post('/api/auth/validate-user')
-      .set('access-token', 'token')
-      .end((err, res) => {
-        res.should.have.status(200);
-      });
-  });
 });
