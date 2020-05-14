@@ -29,7 +29,7 @@ const signUp = async (req, res) => {
     <div>
       <h4>Hello ${firstname} ${lastname}!</h4>
       <hr>
-      <h4>We are very happy that you joined Filmify! Have a pleasure using our app!</h4>
+      <h4>We are very happy that you joined Entertainer! Have a pleasure using our app!</h4>
     <div>` )
 
     const token = user.generateAuthToken();
