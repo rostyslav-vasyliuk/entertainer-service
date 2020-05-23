@@ -1,6 +1,8 @@
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/user-model');
+const { Course } = require('../models/course-model');
+const { Event } = require('../models/event-model');
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -49,6 +51,87 @@ const getMoviesOfTheWeek = async () => {
   }
 }
 
+const getCoursesPreferences = async (user) => {
+  if (!user.favouriteCourses.length && !user.visitedCourses.length) {
+    return null;
+  }
+
+  let coursesVisited = [];
+  let coursesFavourite = [];
+
+  if (user.visitedCourses.length) {
+    const mostPopularCourse = getMostPopular(user.visitedCourses);
+
+    const _course = await Course.findById(mostPopularCourse);
+    coursesVisited = await Course.find({ type: _course.type }).limit(5);
+  }
+
+
+  if (user.favouriteCourses.length) {
+    let index = Math.ceil(Math.random() * user.favouriteCourses.length);
+    if (index >= user.favouriteCourses.length) {
+      index = user.favouriteCourses.length - 1;
+    }
+
+    const _course = await Course.findById(user.favouriteCourses[index]);
+
+    coursesFavourite = Course.find({ type: _course.type }).limit(5).skip(3);
+  }
+
+  const uniqueValues = [...coursesVisited];
+
+  uniqueValues.filter((elem) => {
+    for (let i = 0; i < coursesFavourite.length; i++) {
+      if (elem._id !== coursesFavourite[i]._id) {
+        uniqueValues.push(coursesFavourite[i]);
+      }
+    }
+  });
+
+  return { type: 'courses_preferences_content_filtering', data: [...uniqueValues] }
+}
+
+const getEventsPreferences = async (user) => {
+  if (!user.favouriteEvents.length && !user.visitedEvents.length) {
+    return null;
+  }
+
+  let eventsVisited = [];
+  let eventsFavourite = [];
+
+  if (user.visitedEvents.length) {
+    const mostPopularCourse = getMostPopular(user.visitedEvents);
+
+    const _event = await Event.findById(mostPopularCourse);
+    eventsVisited = await Event.find({ type: _event.type }).limit(5);
+  }
+
+
+  if (user.favouriteEvents.length) {
+    let index = Math.ceil(Math.random() * user.favouriteEvents.length);
+    if (index >= user.favouriteEvents.length) {
+      index = user.favouriteEvents.length - 1;
+    }
+
+    const _event = await Event.findById(user.favouriteEvents[index]);
+  
+    eventsFavourite = Event.find({ type: _event.type }).limit(5);
+  }
+
+  const uniqueValues = [...eventsVisited];
+
+  for (let i = 0; i < eventsFavourite.length; i++) {
+    for (let j = 0; j < uniqueValues.length; j++) {
+      if (uniqueValues[j]._id !== eventsFavourite[i]._id) {
+        console.log(eventsFavourite[i]._id);
+        uniqueValues.push(eventsFavourite[i]);
+      }
+    }
+  };
+
+  return { type: 'events_preferences_content_filtering', data: [...uniqueValues] }
+}
+
 const getMoviesPreferencesContentFiltration = async (user) => {
   if (user.moviesPreferences && user.moviesPreferences.length) {
     const query = buildPreferencesQuery(user.moviesPreferences);
@@ -80,12 +163,23 @@ const getRecommendations = async (req, res) => {
     }
 
     const moviesOfTheWeek = await getMoviesOfTheWeek();
-    console.log(moviesOfTheWeek)
+
     if (moviesOfTheWeek && moviesOfTheWeek.length === 2) {
       result.push(moviesOfTheWeek[0]);
       result.push(moviesOfTheWeek[1]);
     }
-    
+
+    const coursesPreferences = await getCoursesPreferences(user);
+
+    if (coursesPreferences && coursesPreferences.data && coursesPreferences.data.length) {
+      result.push(coursesPreferences);
+    }
+
+    const eventsPreferences = await getEventsPreferences(user);
+    if (eventsPreferences && eventsPreferences.data && eventsPreferences.data.length) {
+      result.push(eventsPreferences);
+    }
+
     const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
 
     if (moviesPreferences) {
@@ -157,7 +251,7 @@ const getActor = (id) => (
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i >= 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
