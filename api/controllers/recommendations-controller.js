@@ -114,7 +114,7 @@ const getEventsPreferences = async (user) => {
     }
 
     const _event = await Event.findById(user.favouriteEvents[index]);
-  
+
     eventsFavourite = Event.find({ type: _event.type }).limit(5);
   }
 
@@ -130,6 +130,50 @@ const getEventsPreferences = async (user) => {
   };
 
   return { type: 'events_preferences_content_filtering', data: [...uniqueValues] }
+}
+
+const getMoviesCollaborativeFiltering = async (user) => {
+  const dateMin = new Date(user.birthdate);
+  const dateMax = new Date(user.birthdate);
+  dateMax.setFullYear(dateMax.getFullYear() + 3);
+  dateMin.setFullYear(dateMin.getFullYear() - 3);
+
+  const users = await User.find({});
+  let counter = 0;
+
+  const similarUsers = users.filter((user) => {
+    if (counter >= 20) {
+      return false;
+    }
+    if (new Date(user.birthdate).getTime() > dateMin.getTime() && new Date(user.birthdate).getTime() < dateMax.getTime()) {
+      counter++;
+      return true;
+    }
+  });
+
+  shuffleArray(similarUsers);
+
+  const favouriteMoviesIDS = similarUsers.map((user) => user.visitedMovies).filter((elem) => elem.length);
+  const preferences = [];
+
+  let i = 0;
+
+  // while (preferences.length < 10 || i < 20) {
+  //   console.log('ss');
+  //   if (i < favouriteMoviesIDS.length - 1) {
+  //     for (let j = favouriteMoviesIDS.length; j > 0; j--) {
+  //       if (i === j) {
+  //         continue;
+  //       }
+  //       console.log('nns');
+  //       const common = findCommon(favouriteMoviesIDS[i], favouriteMoviesIDS[j], preferences);
+  //       preferences.push([...common]);
+  //     }
+  //   }
+  //   i++;
+  // }
+  console.log(preferences);
+  return { type: 'movies_collaborative_filtering', data: [] }
 }
 
 const getMoviesPreferencesContentFiltration = async (user) => {
@@ -169,6 +213,20 @@ const getRecommendations = async (req, res) => {
       result.push(moviesOfTheWeek[1]);
     }
 
+    const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
+
+    if (moviesPreferences) {
+      result.push(moviesPreferences);
+    }
+
+    const collaborativeFiltering = await getMoviesCollaborativeFiltering(user);
+
+    if (collaborativeFiltering) {
+      result.push(collaborativeFiltering);
+    }
+
+    shuffleArray(result);
+
     const coursesPreferences = await getCoursesPreferences(user);
 
     if (coursesPreferences && coursesPreferences.data && coursesPreferences.data.length) {
@@ -179,14 +237,6 @@ const getRecommendations = async (req, res) => {
     if (eventsPreferences && eventsPreferences.data && eventsPreferences.data.length) {
       result.push(eventsPreferences);
     }
-
-    const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
-
-    if (moviesPreferences) {
-      result.push(moviesPreferences);
-    }
-
-    shuffleArray(result);
 
     res.status(200).send({ result });
   } catch (err) {
@@ -254,4 +304,45 @@ function shuffleArray(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+}
+
+function containsAll(...arguments) {
+  var output = [];
+  var cntObj = {};
+  var array, item, cnt;
+  // for each array passed as an argument to the function
+  for (var i = 0; i < arguments.length; i++) {
+    array = arguments[i];
+    // for each element in the array
+    for (var j = 0; j < array.length; j++) {
+      item = "-" + array[j];
+      cnt = cntObj[item] || 0;
+      // if cnt is exactly the number of previous arrays, 
+      // then increment by one so we count only one per array
+      if (cnt == i) {
+        cntObj[item] = cnt + 1;
+      }
+    }
+  }
+  // now collect all results that are in all arrays
+  for (item in cntObj) {
+    if (cntObj.hasOwnProperty(item) && cntObj[item] === arguments.length) {
+      output.push(item.substring(1));
+    }
+  }
+  return (output);
+}
+
+const findCommon = (arr1, arr2, pr) => {
+  let res = [];
+
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] == arr2[j] && !res.includes(arr1[i]) && !pr.includes(arr1[i])) {
+        res.includes(arr1[i]);
+      }
+    }
+  }
+
+  return res;
 }
