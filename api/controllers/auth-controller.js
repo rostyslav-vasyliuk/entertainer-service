@@ -81,6 +81,23 @@ const validateUser = async (req, res) => {
   }
 };
 
+const validateEmail = async (req, res) => {
+  try {
+    const email = req.body.email;
+
+    if (!email) return res.status(404).json({ message: 'Email not found!' });
+
+    const user = await User.findOne({ email }).select('-password');
+    if (user) {
+      res.status(400).json({ message: 'Userr with following email exists' });
+    }
+    res.status(200).json({ message: 'Userr with following email doesnt exists' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
 const forgotPasswordPending = async (req, res) => {
   try {
     const { email } = req.body;
@@ -165,5 +182,6 @@ module.exports = {
   validateUser,
   forgotPasswordPending,
   confirmForgotPasswordCode,
-  resetPassword
+  resetPassword,
+  validateEmail
 };
