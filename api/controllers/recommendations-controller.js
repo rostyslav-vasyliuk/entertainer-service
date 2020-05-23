@@ -154,24 +154,27 @@ const getMoviesCollaborativeFiltering = async (user) => {
   shuffleArray(similarUsers);
 
   const favouriteMoviesIDS = similarUsers.map((user) => user.visitedMovies).filter((elem) => elem.length);
-  const preferences = [];
-
+  let preferences = [];
   let i = 0;
 
-  // while (preferences.length < 10 || i < 20) {
-  //   console.log('ss');
-  //   if (i < favouriteMoviesIDS.length - 1) {
-  //     for (let j = favouriteMoviesIDS.length; j > 0; j--) {
-  //       if (i === j) {
-  //         continue;
-  //       }
-  //       console.log('nns');
-  //       const common = findCommon(favouriteMoviesIDS[i], favouriteMoviesIDS[j], preferences);
-  //       preferences.push([...common]);
-  //     }
-  //   }
-  //   i++;
-  // }
+  while (preferences.length < 10) {
+    if (i < favouriteMoviesIDS.length - 1) {
+      for (let j = 0; j < favouriteMoviesIDS.length; j++) {
+        if (i === j) {
+          continue;
+        }
+        console.log('nns');
+        const common = findCommon(favouriteMoviesIDS[i], favouriteMoviesIDS[j], preferences);
+        preferences = [...preferences, ...common];
+      }
+    }
+
+    if (i > 30) {
+      break;
+    }
+
+    i++;
+  }
   console.log(preferences);
   return { type: 'movies_collaborative_filtering', data: [] }
 }
@@ -225,18 +228,19 @@ const getRecommendations = async (req, res) => {
       result.push(collaborativeFiltering);
     }
 
-    shuffleArray(result);
-
+    
     const coursesPreferences = await getCoursesPreferences(user);
-
+    console.log(coursesPreferences);
     if (coursesPreferences && coursesPreferences.data && coursesPreferences.data.length) {
       result.push(coursesPreferences);
     }
-
+    
     const eventsPreferences = await getEventsPreferences(user);
     if (eventsPreferences && eventsPreferences.data && eventsPreferences.data.length) {
       result.push(eventsPreferences);
     }
+
+    shuffleArray(result);
 
     res.status(200).send({ result });
   } catch (err) {
