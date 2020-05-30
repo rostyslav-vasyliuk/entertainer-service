@@ -20,8 +20,8 @@ const getDetails = async (req, res) => {
     
     user.save();
 
-    const isFavourite = user.favouriteMovies.indexOf(id) === -1 ? false : true;
-    data.data.isFavourite = isFavourite;
+    const isFavourite = user.favouriteMovies.findIndex((elem) => JSON.parse(elem).id == id);
+    data.data.isFavourite = (isFavourite === -1 ? false : true);
 
     res.send(data.data);
   } catch (err) {
@@ -129,21 +129,22 @@ const searchMovie = async (req, res) => {
 const addToFavourites = async (req, res) => {
   try {
     const id = req.body.id;
-
+    const data = req.body.data;
+    
     const token = req.headers['access-token'];
     const decoded = jwt.decode(token);
 
     const user = await User.findById(decoded.id);
 
-    const index = user.favouriteMovies.indexOf(id);
+    const index = user.favouriteMovies.findIndex((elem) => JSON.parse(elem).id === id);
 
     if (index === -1) {
-      user.favouriteMovies.push(id)
+      user.favouriteMovies.push(JSON.stringify(data))
     } else {
       user.favouriteMovies.splice(index, 1);
     }
 
-    await user.save();
+    user.save();
 
     const isFavourite = index === -1 ? true : false;
     res.status(200).send({ isFavourite });
@@ -159,19 +160,7 @@ const getFavourites = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    const favouriteIDs = user.favouriteMovies;
-
-    const urls = favouriteIDs.map((id, index) => {
-      if (index < 20) {
-        return `${BASE_URL}/movie/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=credits,videos`
-      }
-    })
-
-    const responses = await axios.all(urls.map((url) => (axios.get(url))));
-
-    const favouriteMovies = responses.map((elem) => elem.data);
-
-    res.status(200).send({ favouriteMovies });
+    res.status(200).send({ favouriteMovies: user.favouriteMovies });
   } catch (err) {
     res.status(500).json(err);
   }

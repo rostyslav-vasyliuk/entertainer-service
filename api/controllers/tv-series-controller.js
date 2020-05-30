@@ -18,10 +18,10 @@ const getDetails = async (req, res) => {
 
     user.visitedSeries.push(id);
 
-    await user.save();
+    user.save();
 
-    const isFavourite = user.favouriteSeries.indexOf(id) === -1 ? false : true;
-    data.data.isFavourite = isFavourite;
+    const isFavourite = user.favouriteSeries.findIndex((elem) => JSON.parse(elem).id == id);
+    data.data.isFavourite = (isFavourite === -1 ? false : true);
 
     res.send(data.data);
   } catch (err) {
@@ -89,21 +89,22 @@ const getTopByGenre = async (req, res) => {
 const addToFavourites = async (req, res) => {
   try {
     const id = req.body.id;
+    const data = req.body.data;
 
     const token = req.headers['access-token'];
     const decoded = jwt.decode(token);
 
     const user = await User.findById(decoded.id);
 
-    const index = user.favouriteSeries.indexOf(id);
+    const index = user.favouriteSeries.findIndex((elem) => JSON.parse(elem).id == id);
 
     if (index === -1) {
-      user.favouriteSeries.push(id)
+      user.favouriteSeries.push(JSON.stringify(data));
     } else {
       user.favouriteSeries.splice(index, 1);
     }
 
-    await user.save();
+    user.save();
 
     const isFavourite = index === -1 ? true : false;
     res.status(200).send({ isFavourite });
@@ -119,19 +120,8 @@ const getFavourites = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    const favouriteIDs = user.favouriteSeries;
+    res.status(200).send({ favouriteSeries: user.favouriteSeries });
 
-    const urls = favouriteIDs.map((id, index) => {
-      if (index < 20) {
-        return `${BASE_URL}/tv/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos`;
-      }
-    })
-
-    const responses = await axios.all(urls.map((url) => (axios.get(url))));
-
-    const favouriteSeries = responses.map((elem) => elem.data);
-
-    res.status(200).send({ favouriteSeries });
   } catch (err) {
     res.status(500).json(err);
   }

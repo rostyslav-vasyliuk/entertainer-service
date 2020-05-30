@@ -117,7 +117,7 @@ const sortByDate = (data) => {
 
 const karabasGrabber = async (req, res) => {
   try {
-    const towns = ['lviv.', 'kiev.', 'kharkov.', 'odessa.'];
+    const towns = ['odessa.'];
     let eventsList = [];
     for (let i = 0; i < towns.length; i++) {
 

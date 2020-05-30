@@ -36,7 +36,7 @@ const getDetails = async (req, res) => {
 
     const course = await Course.findById(id);
 
-    const recommendations = await Course.find({ type: course.type })
+    const recommendations = await Course.find({ type: course.type, _id: { $ne: id } })
       .limit(10)
       .sort({ date: 'asc' });
 

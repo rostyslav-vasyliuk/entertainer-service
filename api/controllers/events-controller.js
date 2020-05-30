@@ -35,7 +35,7 @@ const getDetails = async (req, res) => {
 
     const event = await Event.findById(id);
 
-    const recommendations = await Event.find({ categories: event.categories[0] })
+    const recommendations = await Event.find({ categories: event.categories[0], _id: { $ne: id } })
       .limit(10)
       .sort({ date: 'asc' });
 

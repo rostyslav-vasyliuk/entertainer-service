@@ -75,7 +75,9 @@ const getCoursesPreferences = async (user) => {
 
     const _course = await Course.findById(user.favouriteCourses[index]);
 
-    coursesFavourite = Course.find({ type: _course.type }).limit(5).skip(3);
+    if (_course) {
+      coursesFavourite = await Course.find({ type: _course.type }).limit(5).skip(3);
+    }
   }
 
   const uniqueValues = [...coursesVisited];
@@ -103,9 +105,10 @@ const getEventsPreferences = async (user) => {
     const mostPopularCourse = getMostPopular(user.visitedEvents);
 
     const _event = await Event.findById(mostPopularCourse);
-    eventsVisited = await Event.find({ type: _event.type }).limit(5);
+    if (_event) {
+      eventsVisited = await Event.find({ type: _event.type }).limit(5);
+    }
   }
-
 
   if (user.favouriteEvents.length) {
     let index = Math.ceil(Math.random() * user.favouriteEvents.length);
@@ -114,8 +117,9 @@ const getEventsPreferences = async (user) => {
     }
 
     const _event = await Event.findById(user.favouriteEvents[index]);
-
-    eventsFavourite = Event.find({ type: _event.type }).limit(5);
+    if (_event) {
+      eventsFavourite = await Event.find({ type: _event.type }).limit(5);
+    }
   }
 
   const uniqueValues = [...eventsVisited];
@@ -123,7 +127,6 @@ const getEventsPreferences = async (user) => {
   for (let i = 0; i < eventsFavourite.length; i++) {
     for (let j = 0; j < uniqueValues.length; j++) {
       if (uniqueValues[j]._id !== eventsFavourite[i]._id) {
-        console.log(eventsFavourite[i]._id);
         uniqueValues.push(eventsFavourite[i]);
       }
     }
@@ -153,39 +156,63 @@ const getMoviesCollaborativeFiltering = async (user) => {
 
   shuffleArray(similarUsers);
 
-  const favouriteMoviesIDS = similarUsers.map((user) => user.visitedMovies).filter((elem) => elem.length);
-  let preferences = [];
-  let i = 0;
+  const favouriteMoviesIDS = similarUsers.map((user) => user.favouriteMovies).filter((elem) => elem.length);
 
-  while (preferences.length < 10) {
-    if (i < favouriteMoviesIDS.length - 1) {
-      for (let j = 0; j < favouriteMoviesIDS.length; j++) {
-        if (i === j) {
-          continue;
-        }
-        console.log('nns');
-        const common = findCommon(favouriteMoviesIDS[i], favouriteMoviesIDS[j], preferences);
-        preferences = [...preferences, ...common];
-      }
+  const allIds = [];
+  const allMovies = [];
+  favouriteMoviesIDS.forEach((elem) => {
+    elem.forEach((el) => {
+      allIds.push(JSON.parse(el).id);
+      allMovies.push(JSON.parse(el));
+    })
+  });
+
+  const valluableMatch = findDuplicates(allIds);
+  const result = [];
+  for (let i = 0; i < allMovies.length; i++) {
+    if (valluableMatch.includes(allMovies[i].id) && result.findIndex((elem) => elem.id === allMovies[i].id) === -1) {
+      result.push(allMovies[i]);
     }
-
-    if (i > 30) {
-      break;
-    }
-
-    i++;
   }
-  console.log(preferences);
-  return { type: 'movies_collaborative_filtering', data: [] }
+  console.log(result.length);
+  return { type: 'movies_collaborative_filtering', data: [...result] }
+}
+
+const findDuplicates = (arr) => {
+  let sorted_arr = arr.slice().sort();
+  let results = [];
+  for (let i = 0; i < sorted_arr.length - 1; i++) {
+    if (sorted_arr[i + 1] == sorted_arr[i]) {
+      results.push(sorted_arr[i]);
+    }
+  }
+  return results;
 }
 
 const getMoviesPreferencesContentFiltration = async (user) => {
-  if (user.moviesPreferences && user.moviesPreferences.length) {
-    const query = buildPreferencesQuery(user.moviesPreferences);
-    const preferencesResponse = await axios.get(query);
-
-    return { type: 'movies_preferences', data: preferencesResponse.data.results };
+  if (!user.favouriteMovies.length) {
+    return null;
   }
+  const favouriteMovies = user.favouriteMovies.map((elem) => JSON.parse(elem));
+  const actorArray = [];
+  for (let i = 0; i < favouriteMovies.length; i++) {
+    if (!favouriteMovies[i].credits.cast.length || !favouriteMovies[i].credits.cast[0].id) {
+      continue;
+    }
+    actorArray.push(favouriteMovies[i].credits.cast[0].id);
+
+    if (favouriteMovies[i].credits.cast.length > 1 && favouriteMovies[i].credits.cast[1].id) {
+      actorArray.push(favouriteMovies[i].credits.cast[1].id);
+    }
+  }
+
+  const query = buildPreferencesQuery(user.moviesPreferences, actorArray);
+  const preferencesResponse = await axios.get(query);
+
+  const ids = favouriteMovies.map((elem) => elem.id);
+  const result = preferencesResponse.data.results.filter((movie) => !ids.includes(movie.id));
+
+  return { type: 'movies_preferences', data: result };
 }
 
 const getRecommendations = async (req, res) => {
@@ -195,6 +222,12 @@ const getRecommendations = async (req, res) => {
 
     const user = await User.findById(decoded.id);
     const result = [];
+
+    const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
+
+    if (moviesPreferences) {
+      result.push(moviesPreferences);
+    }
 
     const actorsRecommendations = await getMostVisitedActorRecommendations(user);
 
@@ -216,31 +249,25 @@ const getRecommendations = async (req, res) => {
       result.push(moviesOfTheWeek[1]);
     }
 
-    const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
-
-    if (moviesPreferences) {
-      result.push(moviesPreferences);
-    }
-
     const collaborativeFiltering = await getMoviesCollaborativeFiltering(user);
 
     if (collaborativeFiltering) {
       result.push(collaborativeFiltering);
     }
 
-    
+
     const coursesPreferences = await getCoursesPreferences(user);
-    console.log(coursesPreferences);
+    // console.log(coursesPreferences);
     if (coursesPreferences && coursesPreferences.data && coursesPreferences.data.length) {
       result.push(coursesPreferences);
     }
-    
+
     const eventsPreferences = await getEventsPreferences(user);
     if (eventsPreferences && eventsPreferences.data && eventsPreferences.data.length) {
       result.push(eventsPreferences);
     }
 
-    shuffleArray(result);
+    // shuffleArray(result);
 
     res.status(200).send({ result });
   } catch (err) {
@@ -249,7 +276,7 @@ const getRecommendations = async (req, res) => {
   }
 };
 
-const buildPreferencesQuery = (moviesPreferences) => {
+const buildPreferencesQuery = (moviesPreferences, actorsArray) => {
   let genres = '';
   moviesPreferences.forEach((element, index) => {
     if (index === moviesPreferences.length - 1) {
@@ -258,12 +285,28 @@ const buildPreferencesQuery = (moviesPreferences) => {
       genres += `${Number(element)}|`
     }
   });
+
   const basic = `${BASE_URL}/discover/movie?api_key=${process.env.API_KEY}&language=en-US&include_adult=false&include_video=false&page=1`;
 
-  const options = ['vote_count.desc', 'revenue.desc', 'vote_average.desc', 'popularity.desc'];
-  const option_index = Math.floor(Math.random() * 4);
+  const options = ['popularity.desc', 'vote_count.desc'];
+  const date_gte = ['2000-01-01', '2010-01-01', '2015-01-01'];
+  let query = `${basic}&sort_by=${options[Math.round(Math.random())]}`;
 
-  const query = `${basic}&sort_by=${options[option_index]}&with_genres=${genres}`;
+  if (genres !== '') {
+    query += `&with_genres=${genres}`
+  }
+
+  let actorsToQuery = '';
+  if (actorsArray.length > 1) {
+    const randomActors = actorsArray.sort(() => Math.random() - Math.random()).slice(0, 2);
+    actorsToQuery += randomActors.join('|');
+  }
+
+  if (actorsArray && actorsArray.length) {
+    query += `&with_cast=${actorsToQuery}`;
+  }
+
+  query += `$release_date.gte=${date_gte[Math.round(Math.random() * 3)]}`
 
   return query;
 }
