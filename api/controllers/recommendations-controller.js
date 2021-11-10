@@ -109,6 +109,7 @@ const getMoviesPreferencesContentFiltration = async (user) => {
   }
   const favouriteMovies = user.favouriteMovies.map((elem) => JSON.parse(elem));
   const actorArray = [];
+  const genresArray = [];
   for (let i = 0; i < favouriteMovies.length; i++) {
     if (!favouriteMovies[i].credits.cast.length || !favouriteMovies[i].credits.cast[0].id) {
       continue;
@@ -118,9 +119,17 @@ const getMoviesPreferencesContentFiltration = async (user) => {
     if (favouriteMovies[i].credits.cast.length > 1 && favouriteMovies[i].credits.cast[1].id) {
       actorArray.push(favouriteMovies[i].credits.cast[1].id);
     }
+
+    if (favouriteMovies[i].genres && favouriteMovies[i].genres.length) {
+      favouriteMovies[i].genres.forEach((elem) => {
+        if (!genresArray.includes(elem.id)) {
+          genresArray.push(elem.id);
+        }
+      });
+    }
   }
 
-  const query = buildPreferencesQuery(user.moviesPreferences, actorArray);
+  const query = buildPreferencesQuery(user.moviesPreferences, actorArray, genresArray);
   const preferencesResponse = await axios.get(query);
 
   const ids = favouriteMovies.map((elem) => elem.id);
@@ -158,7 +167,7 @@ const getRecommendations = async (req, res) => {
   }
 };
 
-const buildPreferencesQuery = (moviesPreferences, actorsArray) => {
+const buildPreferencesQuery = (moviesPreferences, actorsArray, genresArray) => {
   let genres = '';
   moviesPreferences.forEach((element, index) => {
     if (index === moviesPreferences.length - 1) {
@@ -186,6 +195,10 @@ const buildPreferencesQuery = (moviesPreferences, actorsArray) => {
 
   if (actorsArray && actorsArray.length) {
     query += `&with_cast=${actorsToQuery}`;
+  }
+
+  if (genresArray && genresArray.length) {
+    query += `&with_genres=${genresArray.join('|')}`
   }
 
   query += `$release_date.gte=${date_gte[Math.round(Math.random() * 3)]}`
