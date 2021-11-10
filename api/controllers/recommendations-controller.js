@@ -1,13 +1,11 @@
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/user-model');
-const { Course } = require('../models/course-model');
-const { Event } = require('../models/event-model');
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const getMostVisitedActorRecommendations = async (user) => {
-  const mostVisitedActor = getMostPopular(user.actorsVisited, 0);
+  const mostVisitedActor = getMostPopular(user.visitedActors, 0);
 
   if (mostVisitedActor) {
     const actorInfo = await getActor(mostVisitedActor);
@@ -51,90 +49,6 @@ const getMoviesOfTheWeek = async () => {
   }
 }
 
-const getCoursesPreferences = async (user) => {
-  if (!user.favouriteCourses.length && !user.visitedCourses.length) {
-    return null;
-  }
-
-  let coursesVisited = [];
-  let coursesFavourite = [];
-
-  if (user.visitedCourses.length) {
-    const mostPopularCourse = getMostPopular(user.visitedCourses);
-
-    const _course = await Course.findById(mostPopularCourse);
-    coursesVisited = await Course.find({ type: _course.type }).limit(5);
-  }
-
-
-  if (user.favouriteCourses.length) {
-    let index = Math.ceil(Math.random() * user.favouriteCourses.length);
-    if (index >= user.favouriteCourses.length) {
-      index = user.favouriteCourses.length - 1;
-    }
-
-    const _course = await Course.findById(user.favouriteCourses[index]);
-
-    if (_course) {
-      coursesFavourite = await Course.find({ type: _course.type }).limit(5).skip(3);
-    }
-  }
-
-  const uniqueValues = [...coursesVisited];
-
-  uniqueValues.filter((elem) => {
-    for (let i = 0; i < coursesFavourite.length; i++) {
-      if (elem._id !== coursesFavourite[i]._id) {
-        uniqueValues.push(coursesFavourite[i]);
-      }
-    }
-  });
-
-  return { type: 'courses_preferences_content_filtering', data: [...uniqueValues] }
-}
-
-const getEventsPreferences = async (user) => {
-  if (!user.favouriteEvents.length && !user.visitedEvents.length) {
-    return null;
-  }
-
-  let eventsVisited = [];
-  let eventsFavourite = [];
-
-  if (user.visitedEvents.length) {
-    const mostPopularCourse = getMostPopular(user.visitedEvents);
-
-    const _event = await Event.findById(mostPopularCourse);
-    if (_event) {
-      eventsVisited = await Event.find({ type: _event.type }).limit(5);
-    }
-  }
-
-  if (user.favouriteEvents.length) {
-    let index = Math.ceil(Math.random() * user.favouriteEvents.length);
-    if (index >= user.favouriteEvents.length) {
-      index = user.favouriteEvents.length - 1;
-    }
-
-    const _event = await Event.findById(user.favouriteEvents[index]);
-    if (_event) {
-      eventsFavourite = await Event.find({ type: _event.type }).limit(5);
-    }
-  }
-
-  const uniqueValues = [...eventsVisited];
-
-  for (let i = 0; i < eventsFavourite.length; i++) {
-    for (let j = 0; j < uniqueValues.length; j++) {
-      if (uniqueValues[j]._id !== eventsFavourite[i]._id) {
-        uniqueValues.push(eventsFavourite[i]);
-      }
-    }
-  };
-
-  return { type: 'events_preferences_content_filtering', data: [...uniqueValues] }
-}
-
 const getMoviesCollaborativeFiltering = async (user) => {
   const dateMin = new Date(user.birthdate);
   const dateMax = new Date(user.birthdate);
@@ -174,7 +88,7 @@ const getMoviesCollaborativeFiltering = async (user) => {
       result.push(allMovies[i]);
     }
   }
-  console.log(result.length);
+
   return { type: 'movies_collaborative_filtering', data: [...result] }
 }
 
@@ -223,16 +137,11 @@ const getRecommendations = async (req, res) => {
     const user = await User.findById(decoded.id);
     const result = [];
 
-    const moviesPreferences = await getMoviesPreferencesContentFiltration(user);
+    const moviesOfTheWeek = await getMoviesOfTheWeek();
 
-    if (moviesPreferences) {
-      result.push(moviesPreferences);
-    }
-
-    const actorsRecommendations = await getMostVisitedActorRecommendations(user);
-
-    if (actorsRecommendations) {
-      result.push(actorsRecommendations);
+    if (moviesOfTheWeek && moviesOfTheWeek.length === 2) {
+      result.push(moviesOfTheWeek[0]);
+      result.push(moviesOfTheWeek[1]);
     }
 
     const seriesOfTheWeek = await getSeriesOfTheWeek();
@@ -241,33 +150,6 @@ const getRecommendations = async (req, res) => {
       result.push(seriesOfTheWeek[0]);
       result.push(seriesOfTheWeek[1]);
     }
-
-    const moviesOfTheWeek = await getMoviesOfTheWeek();
-
-    if (moviesOfTheWeek && moviesOfTheWeek.length === 2) {
-      result.push(moviesOfTheWeek[0]);
-      result.push(moviesOfTheWeek[1]);
-    }
-
-    const collaborativeFiltering = await getMoviesCollaborativeFiltering(user);
-
-    if (collaborativeFiltering) {
-      result.push(collaborativeFiltering);
-    }
-
-
-    const coursesPreferences = await getCoursesPreferences(user);
-    // console.log(coursesPreferences);
-    if (coursesPreferences && coursesPreferences.data && coursesPreferences.data.length) {
-      result.push(coursesPreferences);
-    }
-
-    const eventsPreferences = await getEventsPreferences(user);
-    if (eventsPreferences && eventsPreferences.data && eventsPreferences.data.length) {
-      result.push(eventsPreferences);
-    }
-
-    // shuffleArray(result);
 
     res.status(200).send({ result });
   } catch (err) {

@@ -3,8 +3,9 @@ const Vector = require('vector-object');
 const Cluster = require('./Cluster');
 
 class KMeansEngine {
-  constructor(vectors, options, callback) {
+  constructor(vectors, userIDs, options, callback) {
     this.vectors = vectors;
+    this.userIDs = userIDs;
     this.options = options;
     this.k = this.options.k;
     this.debug = this.options.debug || false;
@@ -152,7 +153,7 @@ class KMeansEngine {
 
         self.showLog(`Assigned vector ${i} to centroid ${clusterIndex}`);
 
-        self.clusters[clusterIndex].addVector(i, vector);
+        self.clusters[clusterIndex].addVector(self.userIDs[i], vector);
       }
 
       // re-calculate the centroids
@@ -190,7 +191,7 @@ class KMeansEngine {
   }
 }
 
-exports.clusterize = (vectors, options, callback) => {
-  const kmeans = new KMeansEngine(vectors, options, callback);
+exports.clusterize = (vectors, userIDs, options, callback) => {
+  const kmeans = new KMeansEngine(vectors, userIDs, options, callback);
   return kmeans.clusterize();
 };

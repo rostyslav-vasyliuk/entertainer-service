@@ -71,7 +71,7 @@ const signIn = async (req, res) => {
 const validateUser = async (req, res) => {
   try {
     const token = req.headers['access-token'];
-    if (!token) return res.status(404).json({ message: 'Token not found!' });
+    if (!token || token === '') return res.status(404).json({ message: 'Token not found!' });
     const data = jwt.verify(token, process.env.JWT_KEY);
 
     const user = await User.findById(data.id).select('-password');

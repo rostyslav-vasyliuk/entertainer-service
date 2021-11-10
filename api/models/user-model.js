@@ -16,20 +16,15 @@ const userSchema = new mongoose.Schema(
     countryCode: String,
     image: String,
     forgotPasswordConfirmationCode: String,
-    favouriteEvents: [String],
     favouriteMovies: [String],
     favouriteSeries: [String],
-    favouriteCourses: [String],
-    visitedEvents: [String],
     visitedMovies: [String],
     visitedSeries: [String],
-    visitedCourses: [String],
-    actorsVisited: [String],
-    eventsPreferences: [String],
-    moviesPreferences: [String],
-    seriesPreferences: [String],
-    coursesPreferences: [String],
-    order: [Object]
+    visitedActors: [String],
+    averageMovieGenres: [Object],
+    averageSeriesGenres: [Object],
+    userMovieRatings: [Object],
+    userSeriesRatings: [Object],
   },
   { timestamps: true }
 );
@@ -51,4 +46,4 @@ const User = mongoose.model('User', userSchema);
 
 module.exports = {
   User
-}
+};

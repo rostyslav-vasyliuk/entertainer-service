@@ -20,8 +20,8 @@ const getDetails = async (req, res) => {
 
     user.save();
 
-    const isFavourite = user.favouriteSeries.findIndex((elem) => JSON.parse(elem).id == id);
-    data.data.isFavourite = (isFavourite === -1 ? false : true);
+    // const isFavourite = user.favouriteSeries.findIndex((elem) => JSON.parse(elem).id == id);
+    // data.data.isFavourite = (isFavourite === -1 ? false : true);
 
     res.send(data.data);
   } catch (err) {

@@ -16,7 +16,9 @@ const getDetails = async (req, res) => {
 
     const user = await User.findById(decoded.id);
 
-    user.actorsVisited.push(id);
+    if (!user.visitedActors.includes) {
+      user.visitedActors.push(id);
+    }
     
     await user.save();
 

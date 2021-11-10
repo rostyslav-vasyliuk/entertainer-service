@@ -1,0 +1,2210 @@
+[
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "438631",
+      "370172",
+      "610253",
+      "580489",
+      "796499",
+      "524434"
+    ],
+    "visitedSeries": [
+      "93405"
+    ],
+    "visitedActors": [
+      "16808",
+      "1251069",
+      "1251069",
+      "1290466"
+    ],
+    "averageMovieGenres": [
+      {
+        "count": 5,
+        "id": 28,
+        "name": "Action",
+        "average": 3.6,
+        "movieIDs": [
+          370172,
+          796499,
+          580489,
+          438631,
+          524434
+        ]
+      },
+      {
+        "count": 3,
+        "id": 12,
+        "name": "Adventure",
+        "average": 3.67,
+        "movieIDs": [
+          370172,
+          438631,
+          524434
+        ]
+      },
+      {
+        "count": 1,
+        "id": 18,
+        "name": "Drama",
+        "average": 5,
+        "movieIDs": [
+          438631
+        ]
+      },
+      {
+        "count": 3,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 4,
+        "movieIDs": [
+          580489,
+          438631,
+          524434
+        ]
+      },
+      {
+        "count": 3,
+        "id": 53,
+        "name": "Thriller",
+        "average": 3.33,
+        "movieIDs": [
+          370172,
+          610253,
+          796499
+        ]
+      },
+      {
+        "count": 1,
+        "id": 27,
+        "name": "Horror",
+        "average": 4,
+        "movieIDs": [
+          610253
+        ]
+      },
+      {
+        "count": 1,
+        "id": 35,
+        "name": "Comedy",
+        "average": 3,
+        "movieIDs": [
+          796499
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 438631,
+        "rating": 5
+      },
+      {
+        "movieID": 370172,
+        "rating": 3
+      },
+      {
+        "movieID": 610253,
+        "rating": 4
+      },
+      {
+        "movieID": 580489,
+        "rating": 4
+      },
+      {
+        "movieID": 796499,
+        "rating": 3
+      },
+      {
+        "movieID": 524434,
+        "rating": 3
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "61845b1c1f76193d882cb359",
+    "actorsVisited": [],
+    "firstname": "Test",
+    "lastname": "Test",
+    "email": "test1@gmail.com",
+    "password": "$2a$10$tRMgCZCWiTYopybjoiPYEesWJ4n8SZV0XjJpM3p7jOD0c7cVaANh6",
+    "gender": "Male",
+    "birthdate": "2002-08-21T23:15:30.000Z",
+    "country": "American Samoa",
+    "countryCode": "AS",
+    "createdAt": "2021-11-04T22:13:48.216Z",
+    "updatedAt": "2021-11-04T22:18:18.314Z",
+    "__v": 12
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "610253",
+      "547565",
+      "565028",
+      "619778",
+      "585216",
+      "567748",
+      "785752",
+      "740925",
+      "524434",
+      "580489",
+      "370172",
+      "566525",
+      "436969",
+      "506043"
+    ],
+    "visitedSeries": [
+      "93405"
+    ],
+    "visitedActors": [
+      "1784612"
+    ],
+    "averageMovieGenres": [
+      {
+        "count": 6,
+        "id": 27,
+        "name": "Horror",
+        "average": 4.67,
+        "movieIDs": [
+          610253,
+          547565,
+          565028,
+          619778,
+          585216,
+          740925
+        ]
+      },
+      {
+        "count": 9,
+        "id": 53,
+        "name": "Thriller",
+        "average": 3.89,
+        "movieIDs": [
+          610253,
+          547565,
+          565028,
+          619778,
+          585216,
+          567748,
+          785752,
+          740925,
+          370172
+        ]
+      },
+      {
+        "count": 4,
+        "id": 9648,
+        "name": "Mystery",
+        "average": 4.75,
+        "movieIDs": [
+          547565,
+          619778,
+          585216,
+          740925
+        ]
+      },
+      {
+        "count": 1,
+        "id": 80,
+        "name": "Crime",
+        "average": 3,
+        "movieIDs": [
+          567748
+        ]
+      },
+      {
+        "count": 2,
+        "id": 18,
+        "name": "Drama",
+        "average": 2,
+        "movieIDs": [
+          567748,
+          506043
+        ]
+      },
+      {
+        "count": 5,
+        "id": 28,
+        "name": "Action",
+        "average": 2.6,
+        "movieIDs": [
+          524434,
+          580489,
+          370172,
+          566525,
+          436969
+        ]
+      },
+      {
+        "count": 5,
+        "id": 12,
+        "name": "Adventure",
+        "average": 2.6,
+        "movieIDs": [
+          524434,
+          580489,
+          370172,
+          566525,
+          436969
+        ]
+      },
+      {
+        "count": 2,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 3.5,
+        "movieIDs": [
+          524434,
+          580489
+        ]
+      },
+      {
+        "count": 3,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 2.67,
+        "movieIDs": [
+          524434,
+          566525,
+          436969
+        ]
+      },
+      {
+        "count": 1,
+        "id": 35,
+        "name": "Comedy",
+        "average": 2,
+        "movieIDs": [
+          436969
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10749,
+        "name": "Romance",
+        "average": 1,
+        "movieIDs": [
+          506043
+        ]
+      },
+      {
+        "count": 1,
+        "id": 36,
+        "name": "History",
+        "average": 1,
+        "movieIDs": [
+          506043
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 610253,
+        "rating": 5
+      },
+      {
+        "movieID": 547565,
+        "rating": 5
+      },
+      {
+        "movieID": 565028,
+        "rating": 4
+      },
+      {
+        "movieID": 619778,
+        "rating": 4
+      },
+      {
+        "movieID": 585216,
+        "rating": 5
+      },
+      {
+        "movieID": 567748,
+        "rating": 3
+      },
+      {
+        "movieID": 785752,
+        "rating": 2
+      },
+      {
+        "movieID": 740925,
+        "rating": 5
+      },
+      {
+        "movieID": 524434,
+        "rating": 4
+      },
+      {
+        "movieID": 580489,
+        "rating": 3
+      },
+      {
+        "movieID": 370172,
+        "rating": 2
+      },
+      {
+        "movieID": 566525,
+        "rating": 2
+      },
+      {
+        "movieID": 436969,
+        "rating": 2
+      },
+      {
+        "movieID": 506043,
+        "rating": 1
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "6188157438feab021883d62f",
+    "firstname": "Horror",
+    "lastname": "Lover",
+    "email": "test2@gmail.com",
+    "password": "$2a$10$ECij3hHVzqoDCKnInIpdy./gsDJ0DuXsxvm8RlkgYI0sQ0.cMByLS",
+    "gender": "Female",
+    "birthdate": "1997-08-21T23:15:30.000Z",
+    "country": "Antigua and Barbuda",
+    "countryCode": "AG",
+    "createdAt": "2021-11-07T18:05:40.771Z",
+    "updatedAt": "2021-11-07T18:08:32.220Z",
+    "__v": 16
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "610253",
+      "669671",
+      "785516",
+      "672582",
+      "661930",
+      "763149",
+      "779202",
+      "602223",
+      "760883",
+      "591274",
+      "591273",
+      "345670",
+      "25764",
+      "222282"
+    ],
+    "visitedSeries": [
+      "93405",
+      "87811"
+    ],
+    "visitedActors": [
+      "37627",
+      "142115",
+      "1593672",
+      "1059584",
+      "1046862"
+    ],
+    "averageMovieGenres": [
+      {
+        "count": 10,
+        "id": 27,
+        "name": "Horror",
+        "average": 4.5,
+        "movieIDs": [
+          610253,
+          669671,
+          672582,
+          661930,
+          763149,
+          779202,
+          602223,
+          760883,
+          591274,
+          591273
+        ]
+      },
+      {
+        "count": 6,
+        "id": 53,
+        "name": "Thriller",
+        "average": 4.5,
+        "movieIDs": [
+          610253,
+          669671,
+          763149,
+          779202,
+          602223,
+          760883
+        ]
+      },
+      {
+        "count": 3,
+        "id": 28,
+        "name": "Action",
+        "average": 4.67,
+        "movieIDs": [
+          669671,
+          602223,
+          760883
+        ]
+      },
+      {
+        "count": 2,
+        "id": 35,
+        "name": "Comedy",
+        "average": 2,
+        "movieIDs": [
+          785516,
+          25764
+        ]
+      },
+      {
+        "count": 3,
+        "id": 18,
+        "name": "Drama",
+        "average": 3.67,
+        "movieIDs": [
+          661930,
+          763149,
+          345670
+        ]
+      },
+      {
+        "count": 1,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 5,
+        "movieIDs": [
+          661930
+        ]
+      },
+      {
+        "count": 2,
+        "id": 80,
+        "name": "Crime",
+        "average": 3,
+        "movieIDs": [
+          763149,
+          345670
+        ]
+      },
+      {
+        "count": 3,
+        "id": 9648,
+        "name": "Mystery",
+        "average": 4.33,
+        "movieIDs": [
+          779202,
+          591274,
+          591273
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10749,
+        "name": "Romance",
+        "average": 1,
+        "movieIDs": [
+          25764
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 610253,
+        "rating": 5
+      },
+      {
+        "movieID": 669671,
+        "rating": 5
+      },
+      {
+        "movieID": 785516,
+        "rating": 3
+      },
+      {
+        "movieID": 672582,
+        "rating": 5
+      },
+      {
+        "movieID": 661930,
+        "rating": 5
+      },
+      {
+        "movieID": 763149,
+        "rating": 3
+      },
+      {
+        "movieID": 779202,
+        "rating": 5
+      },
+      {
+        "movieID": 602223,
+        "rating": 5
+      },
+      {
+        "movieID": 760883,
+        "rating": 4
+      },
+      {
+        "movieID": 591274,
+        "rating": 4
+      },
+      {
+        "movieID": 591273,
+        "rating": 4
+      },
+      {
+        "movieID": 345670,
+        "rating": 3
+      },
+      {
+        "movieID": 25764,
+        "rating": 1
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "618816e138feab021883d670",
+    "firstname": "Test",
+    "lastname": "Horror",
+    "email": "test3@gmail.com",
+    "password": "$2a$10$ifyJRSw40M6/.uDFv7zPi.fXSayWPGkWNWXYoXnxRu1SdGMp.T6Z2",
+    "gender": "Male",
+    "birthdate": "1989-08-21T23:15:30.000Z",
+    "country": "Angola",
+    "countryCode": "AO",
+    "createdAt": "2021-11-07T18:11:45.914Z",
+    "updatedAt": "2021-11-07T18:16:11.019Z",
+    "__v": 21
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "522241",
+      "11322",
+      "9366",
+      "324786",
+      "228150",
+      "205596",
+      "4348",
+      "633515",
+      "877657",
+      "716594",
+      "684281",
+      "617653",
+      "181812",
+      "140607",
+      "1895",
+      "1894",
+      "885110",
+      "300671",
+      "267860",
+      "296524",
+      "333484",
+      "424694",
+      "72431",
+      "476968",
+      "381284",
+      "652",
+      "787",
+      "1593",
+      "27576",
+      "163"
+    ],
+    "visitedSeries": [],
+    "visitedActors": [
+      "116",
+      "1388593"
+    ],
+    "averageMovieGenres": [
+      {
+        "count": 9,
+        "id": 53,
+        "name": "Thriller",
+        "average": 3.45,
+        "movieIDs": [
+          522241,
+          9366,
+          205596,
+          617653,
+          300671,
+          267860,
+          787,
+          27576,
+          163
+        ]
+      },
+      {
+        "count": 15,
+        "id": 36,
+        "name": "History",
+        "average": 4.86,
+        "movieIDs": [
+          522241,
+          11322,
+          324786,
+          205596,
+          633515,
+          716594,
+          684281,
+          617653,
+          885110,
+          300671,
+          424694,
+          72431,
+          476968,
+          381284,
+          652
+        ]
+      },
+      {
+        "count": 18,
+        "id": 18,
+        "name": "Drama",
+        "average": 4.39,
+        "movieIDs": [
+          522241,
+          9366,
+          324786,
+          228150,
+          205596,
+          4348,
+          633515,
+          716594,
+          684281,
+          617653,
+          885110,
+          300671,
+          296524,
+          424694,
+          72431,
+          476968,
+          381284,
+          787
+        ]
+      },
+      {
+        "count": 4,
+        "id": 80,
+        "name": "Crime",
+        "average": 3.5,
+        "movieIDs": [
+          11322,
+          9366,
+          716594,
+          163
+        ]
+      },
+      {
+        "count": 8,
+        "id": 10752,
+        "name": "War",
+        "average": 4.87,
+        "movieIDs": [
+          324786,
+          228150,
+          205596,
+          633515,
+          885110,
+          300671,
+          72431,
+          652
+        ]
+      },
+      {
+        "count": 14,
+        "id": 28,
+        "name": "Action",
+        "average": 3.28,
+        "movieIDs": [
+          228150,
+          617653,
+          181812,
+          140607,
+          1895,
+          1894,
+          300671,
+          267860,
+          296524,
+          333484,
+          72431,
+          787,
+          1593,
+          27576
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10749,
+        "name": "Romance",
+        "average": 4,
+        "movieIDs": [
+          4348
+        ]
+      },
+      {
+        "count": 1,
+        "id": 99,
+        "name": "Documentary",
+        "average": 2,
+        "movieIDs": [
+          877657
+        ]
+      },
+      {
+        "count": 9,
+        "id": 12,
+        "name": "Adventure",
+        "average": 3.67,
+        "movieIDs": [
+          181812,
+          140607,
+          1895,
+          1894,
+          885110,
+          333484,
+          72431,
+          652,
+          1593
+        ]
+      },
+      {
+        "count": 4,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 2.5,
+        "movieIDs": [
+          181812,
+          140607,
+          1895,
+          1894
+        ]
+      },
+      {
+        "count": 2,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 3.5,
+        "movieIDs": [
+          140607,
+          1593
+        ]
+      },
+      {
+        "count": 1,
+        "id": 37,
+        "name": "Western",
+        "average": 3,
+        "movieIDs": [
+          333484
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10402,
+        "name": "Music",
+        "average": 5,
+        "movieIDs": [
+          424694
+        ]
+      },
+      {
+        "count": 2,
+        "id": 35,
+        "name": "Comedy",
+        "average": 3,
+        "movieIDs": [
+          787,
+          1593
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10751,
+        "name": "Family",
+        "average": 5,
+        "movieIDs": [
+          1593
+        ]
+      },
+      {
+        "count": 1,
+        "id": 9648,
+        "name": "Mystery",
+        "average": 3,
+        "movieIDs": [
+          27576
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 522241,
+        "rating": 5
+      },
+      {
+        "movieID": 11322,
+        "rating": 4
+      },
+      {
+        "movieID": 9366,
+        "rating": 3
+      },
+      {
+        "movieID": 324786,
+        "rating": 4
+      },
+      {
+        "movieID": 228150,
+        "rating": 5
+      },
+      {
+        "movieID": 205596,
+        "rating": 5
+      },
+      {
+        "movieID": 4348,
+        "rating": 4
+      },
+      {
+        "movieID": 633515,
+        "rating": 5
+      },
+      {
+        "movieID": 877657,
+        "rating": 2
+      },
+      {
+        "movieID": 716594,
+        "rating": 5
+      },
+      {
+        "movieID": 684281,
+        "rating": 5
+      },
+      {
+        "movieID": 617653,
+        "rating": 5
+      },
+      {
+        "movieID": 181812,
+        "rating": 3
+      },
+      {
+        "movieID": 140607,
+        "rating": 2
+      },
+      {
+        "movieID": 1895,
+        "rating": 2
+      },
+      {
+        "movieID": 1894,
+        "rating": 3
+      },
+      {
+        "movieID": 885110,
+        "rating": 5
+      },
+      {
+        "movieID": 300671,
+        "rating": 5
+      },
+      {
+        "movieID": 267860,
+        "rating": 2
+      },
+      {
+        "movieID": 296524,
+        "rating": 2
+      },
+      {
+        "movieID": 333484,
+        "rating": 3
+      },
+      {
+        "movieID": 424694,
+        "rating": 5
+      },
+      {
+        "movieID": 72431,
+        "rating": 5
+      },
+      {
+        "movieID": 476968,
+        "rating": 5
+      },
+      {
+        "movieID": 381284,
+        "rating": 5
+      },
+      {
+        "movieID": 652,
+        "rating": 5
+      },
+      {
+        "movieID": 787,
+        "rating": 1
+      },
+      {
+        "movieID": 1593,
+        "rating": 5
+      },
+      {
+        "movieID": 27576,
+        "rating": 3
+      },
+      {
+        "movieID": 163,
+        "rating": 2
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "61881bbc38feab021883d6c0",
+    "firstname": "Test",
+    "lastname": "History",
+    "email": "test4@gmail.com",
+    "password": "$2a$10$ER09ur6F42w1b2EXqvhQlOYPy9P0tRXRNzDjFyzhoVGkABlOlfJqG",
+    "gender": "Male",
+    "birthdate": "2001-08-21T23:15:30.000Z",
+    "country": "Brunei",
+    "countryCode": "BN",
+    "createdAt": "2021-11-07T18:32:29.006Z",
+    "updatedAt": "2021-11-07T18:36:39.009Z",
+    "__v": 32
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "716594",
+      "522241",
+      "633515",
+      "684281",
+      "652",
+      "381284",
+      "6844",
+      "407439",
+      "522162",
+      "522162",
+      "522162",
+      "448344",
+      "13647",
+      "9074",
+      "458109",
+      "50410",
+      "14830",
+      "30675"
+    ],
+    "visitedSeries": [],
+    "visitedActors": [],
+    "averageMovieGenres": [
+      {
+        "count": 2,
+        "id": 80,
+        "name": "Crime",
+        "average": 4.5,
+        "movieIDs": [
+          716594,
+          9074
+        ]
+      },
+      {
+        "count": 8,
+        "id": 18,
+        "name": "Drama",
+        "average": 5,
+        "movieIDs": [
+          716594,
+          522241,
+          633515,
+          684281,
+          381284,
+          6844,
+          407439,
+          522162
+        ]
+      },
+      {
+        "count": 9,
+        "id": 36,
+        "name": "History",
+        "average": 5,
+        "movieIDs": [
+          716594,
+          522241,
+          633515,
+          684281,
+          652,
+          381284,
+          6844,
+          407439,
+          522162
+        ]
+      },
+      {
+        "count": 2,
+        "id": 53,
+        "name": "Thriller",
+        "average": 3.5,
+        "movieIDs": [
+          522241,
+          458109
+        ]
+      },
+      {
+        "count": 3,
+        "id": 10752,
+        "name": "War",
+        "average": 5,
+        "movieIDs": [
+          633515,
+          652,
+          522162
+        ]
+      },
+      {
+        "count": 2,
+        "id": 12,
+        "name": "Adventure",
+        "average": 3.5,
+        "movieIDs": [
+          652,
+          13647
+        ]
+      },
+      {
+        "count": 5,
+        "id": 28,
+        "name": "Action",
+        "average": 3,
+        "movieIDs": [
+          522162,
+          13647,
+          9074,
+          14830,
+          30675
+        ]
+      },
+      {
+        "count": 4,
+        "id": 16,
+        "name": "Animation",
+        "average": 2,
+        "movieIDs": [
+          13647,
+          50410,
+          14830,
+          30675
+        ]
+      },
+      {
+        "count": 2,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 1.5,
+        "movieIDs": [
+          13647,
+          14830
+        ]
+      },
+      {
+        "count": 3,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 2,
+        "movieIDs": [
+          13647,
+          14830,
+          30675
+        ]
+      },
+      {
+        "count": 1,
+        "id": 35,
+        "name": "Comedy",
+        "average": 4,
+        "movieIDs": [
+          9074
+        ]
+      },
+      {
+        "count": 1,
+        "id": 9648,
+        "name": "Mystery",
+        "average": 2,
+        "movieIDs": [
+          458109
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 716594,
+        "rating": 5
+      },
+      {
+        "movieID": 522241,
+        "rating": 5
+      },
+      {
+        "movieID": 633515,
+        "rating": 5
+      },
+      {
+        "movieID": 684281,
+        "rating": 5
+      },
+      {
+        "movieID": 652,
+        "rating": 5
+      },
+      {
+        "movieID": 381284,
+        "rating": 5
+      },
+      {
+        "movieID": 6844,
+        "rating": 5
+      },
+      {
+        "movieID": 407439,
+        "rating": 5
+      },
+      {
+        "movieID": 522162,
+        "rating": 5
+      },
+      {
+        "movieID": 13647,
+        "rating": 2
+      },
+      {
+        "movieID": 9074,
+        "rating": 4
+      },
+      {
+        "movieID": 458109,
+        "rating": 2
+      },
+      {
+        "movieID": 50410,
+        "rating": 2
+      },
+      {
+        "movieID": 14830,
+        "rating": 1
+      },
+      {
+        "movieID": 30675,
+        "rating": 3
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "61881ce038feab021883d74d",
+    "firstname": "Test",
+    "lastname": "History",
+    "email": "test5@gmail.com",
+    "password": "$2a$10$4aFSx8P5MSbopB6UHDU58OmHmKLzhAqQ5gdm9xqnVSItGfU9pV29q",
+    "gender": "Male",
+    "birthdate": "2002-08-21T23:15:30.000Z",
+    "country": "Armenia",
+    "countryCode": "AM",
+    "createdAt": "2021-11-07T18:37:20.376Z",
+    "updatedAt": "2021-11-07T18:41:31.210Z",
+    "__v": 18
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "843241",
+      "639721",
+      "459151",
+      "508943",
+      "675445",
+      "831405",
+      "588921",
+      "375211",
+      "482321",
+      "482321",
+      "703771",
+      "354912",
+      "527774",
+      "20982",
+      "846214"
+    ],
+    "visitedSeries": [],
+    "visitedActors": [],
+    "averageMovieGenres": [
+      {
+        "count": 14,
+        "id": 16,
+        "name": "Animation",
+        "average": 4.86,
+        "movieIDs": [
+          843241,
+          639721,
+          459151,
+          508943,
+          675445,
+          831405,
+          588921,
+          375211,
+          482321,
+          703771,
+          354912,
+          527774,
+          20982,
+          846214
+        ]
+      },
+      {
+        "count": 5,
+        "id": 28,
+        "name": "Action",
+        "average": 4.6,
+        "movieIDs": [
+          843241,
+          831405,
+          703771,
+          527774,
+          20982
+        ]
+      },
+      {
+        "count": 7,
+        "id": 35,
+        "name": "Comedy",
+        "average": 5,
+        "movieIDs": [
+          639721,
+          459151,
+          508943,
+          675445,
+          482321,
+          354912,
+          846214
+        ]
+      },
+      {
+        "count": 9,
+        "id": 10751,
+        "name": "Family",
+        "average": 5,
+        "movieIDs": [
+          639721,
+          459151,
+          508943,
+          675445,
+          588921,
+          482321,
+          354912,
+          527774,
+          846214
+        ]
+      },
+      {
+        "count": 6,
+        "id": 12,
+        "name": "Adventure",
+        "average": 5,
+        "movieIDs": [
+          459151,
+          675445,
+          588921,
+          703771,
+          354912,
+          527774
+        ]
+      },
+      {
+        "count": 6,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 4.67,
+        "movieIDs": [
+          508943,
+          831405,
+          588921,
+          354912,
+          527774,
+          20982
+        ]
+      },
+      {
+        "count": 3,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 5,
+        "movieIDs": [
+          831405,
+          482321,
+          703771
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10402,
+        "name": "Music",
+        "average": 5,
+        "movieIDs": [
+          354912
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 843241,
+        "rating": 5
+      },
+      {
+        "movieID": 639721,
+        "rating": 5
+      },
+      {
+        "movieID": 459151,
+        "rating": 5
+      },
+      {
+        "movieID": 508943,
+        "rating": 5
+      },
+      {
+        "movieID": 675445,
+        "rating": 5
+      },
+      {
+        "movieID": 831405,
+        "rating": 5
+      },
+      {
+        "movieID": 588921,
+        "rating": 5
+      },
+      {
+        "movieID": 375211,
+        "rating": 5
+      },
+      {
+        "movieID": 482321,
+        "rating": 5
+      },
+      {
+        "movieID": 703771,
+        "rating": 5
+      },
+      {
+        "movieID": 354912,
+        "rating": 5
+      },
+      {
+        "movieID": 527774,
+        "rating": 5
+      },
+      {
+        "movieID": 20982,
+        "rating": 3
+      },
+      {
+        "movieID": 846214,
+        "rating": 5
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "6188209c38feab021883d7aa",
+    "firstname": "Test",
+    "lastname": "Animation",
+    "email": "test6@gmail.com",
+    "password": "$2a$10$l17yQFW4FQ3p1IgkPz6dgOCgZ51zrB9sb8alu/V39paJwtBxwT6hO",
+    "gender": "Male",
+    "birthdate": "2003-08-21T23:15:30.000Z",
+    "country": "Armenia",
+    "countryCode": "AM",
+    "createdAt": "2021-11-07T18:53:16.184Z",
+    "updatedAt": "2021-11-07T18:55:23.126Z",
+    "__v": 15
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "459151",
+      "639721",
+      "675445",
+      "588921",
+      "878962",
+      "527774",
+      "826914",
+      "508943",
+      "354912"
+    ],
+    "visitedSeries": [],
+    "visitedActors": [],
+    "averageMovieGenres": [
+      {
+        "count": 8,
+        "id": 16,
+        "name": "Animation",
+        "average": 5,
+        "movieIDs": [
+          459151,
+          639721,
+          675445,
+          588921,
+          878962,
+          527774,
+          508943,
+          354912
+        ]
+      },
+      {
+        "count": 6,
+        "id": 35,
+        "name": "Comedy",
+        "average": 5,
+        "movieIDs": [
+          459151,
+          639721,
+          675445,
+          826914,
+          508943,
+          354912
+        ]
+      },
+      {
+        "count": 5,
+        "id": 12,
+        "name": "Adventure",
+        "average": 5,
+        "movieIDs": [
+          459151,
+          675445,
+          588921,
+          527774,
+          354912
+        ]
+      },
+      {
+        "count": 9,
+        "id": 10751,
+        "name": "Family",
+        "average": 5,
+        "movieIDs": [
+          459151,
+          639721,
+          675445,
+          588921,
+          878962,
+          527774,
+          826914,
+          508943,
+          354912
+        ]
+      },
+      {
+        "count": 5,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 5,
+        "movieIDs": [
+          588921,
+          878962,
+          527774,
+          508943,
+          354912
+        ]
+      },
+      {
+        "count": 1,
+        "id": 28,
+        "name": "Action",
+        "average": 5,
+        "movieIDs": [
+          527774
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10770,
+        "name": "TV Movie",
+        "average": 5,
+        "movieIDs": [
+          826914
+        ]
+      },
+      {
+        "count": 1,
+        "id": 10402,
+        "name": "Music",
+        "average": 5,
+        "movieIDs": [
+          354912
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 459151,
+        "rating": 5
+      },
+      {
+        "movieID": 639721,
+        "rating": 5
+      },
+      {
+        "movieID": 675445,
+        "rating": 5
+      },
+      {
+        "movieID": 588921,
+        "rating": 5
+      },
+      {
+        "movieID": 878962,
+        "rating": 5
+      },
+      {
+        "movieID": 527774,
+        "rating": 5
+      },
+      {
+        "movieID": 826914,
+        "rating": 5
+      },
+      {
+        "movieID": 508943,
+        "rating": 5
+      },
+      {
+        "movieID": 354912,
+        "rating": 5
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "6188215338feab021883d7ef",
+    "firstname": "Test",
+    "lastname": "Family",
+    "email": "test7@gmail.com",
+    "password": "$2a$10$k1R8FGOUxYjijOqYTdpsUe8ZTMwu6Gyr5SfwiWE4/uRVr8UzARTn.",
+    "gender": "Male",
+    "birthdate": "2012-08-21T23:15:30.000Z",
+    "country": "Finland",
+    "countryCode": "FI",
+    "createdAt": "2021-11-07T18:56:20.032Z",
+    "updatedAt": "2021-11-07T18:57:27.497Z",
+    "__v": 9
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "580489",
+      "566525",
+      "524434",
+      "436969",
+      "497698",
+      "100402",
+      "76338",
+      "10195",
+      "1724",
+      "1927",
+      "9480",
+      "1979",
+      "71676",
+      "44912",
+      "370172",
+      "617653",
+      "660000",
+      "655082"
+    ],
+    "visitedSeries": [
+      "81356",
+      "74577"
+    ],
+    "visitedActors": [
+      "1245",
+      "56731",
+      "59175",
+      "2201315"
+    ],
+    "averageMovieGenres": [
+      {
+        "count": 7,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 4.72,
+        "movieIDs": [
+          580489,
+          524434,
+          497698,
+          100402,
+          1724,
+          1927,
+          44912
+        ]
+      },
+      {
+        "count": 15,
+        "id": 28,
+        "name": "Action",
+        "average": 4.33,
+        "movieIDs": [
+          580489,
+          566525,
+          524434,
+          436969,
+          497698,
+          100402,
+          76338,
+          10195,
+          1724,
+          1927,
+          1979,
+          71676,
+          44912,
+          370172,
+          617653
+        ]
+      },
+      {
+        "count": 12,
+        "id": 12,
+        "name": "Adventure",
+        "average": 4.58,
+        "movieIDs": [
+          580489,
+          566525,
+          524434,
+          436969,
+          497698,
+          100402,
+          76338,
+          10195,
+          1724,
+          1979,
+          44912,
+          370172
+        ]
+      },
+      {
+        "count": 7,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 4.57,
+        "movieIDs": [
+          566525,
+          524434,
+          436969,
+          76338,
+          10195,
+          1979,
+          71676
+        ]
+      },
+      {
+        "count": 1,
+        "id": 35,
+        "name": "Comedy",
+        "average": 4,
+        "movieIDs": [
+          436969
+        ]
+      },
+      {
+        "count": 5,
+        "id": 53,
+        "name": "Thriller",
+        "average": 3.6,
+        "movieIDs": [
+          1979,
+          71676,
+          44912,
+          370172,
+          617653
+        ]
+      },
+      {
+        "count": 3,
+        "id": 18,
+        "name": "Drama",
+        "average": 1.67,
+        "movieIDs": [
+          617653,
+          660000,
+          655082
+        ]
+      },
+      {
+        "count": 3,
+        "id": 36,
+        "name": "History",
+        "average": 1.67,
+        "movieIDs": [
+          617653,
+          660000,
+          655082
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 580489,
+        "rating": 5
+      },
+      {
+        "movieID": 566525,
+        "rating": 5
+      },
+      {
+        "movieID": 524434,
+        "rating": 5
+      },
+      {
+        "movieID": 436969,
+        "rating": 4
+      },
+      {
+        "movieID": 497698,
+        "rating": 5
+      },
+      {
+        "movieID": 100402,
+        "rating": 5
+      },
+      {
+        "movieID": 76338,
+        "rating": 5
+      },
+      {
+        "movieID": 10195,
+        "rating": 5
+      },
+      {
+        "movieID": 1724,
+        "rating": 4
+      },
+      {
+        "movieID": 1927,
+        "rating": 4
+      },
+      {
+        "movieID": 1979,
+        "rating": 4
+      },
+      {
+        "movieID": 71676,
+        "rating": 4
+      },
+      {
+        "movieID": 44912,
+        "rating": 5
+      },
+      {
+        "movieID": 370172,
+        "rating": 3
+      },
+      {
+        "movieID": 617653,
+        "rating": 2
+      },
+      {
+        "movieID": 660000,
+        "rating": 1
+      },
+      {
+        "movieID": 655082,
+        "rating": 2
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "618821cb38feab021883d81a",
+    "firstname": "Test",
+    "lastname": "Marvel",
+    "email": "test8@gmail.com",
+    "password": "$2a$10$zXGobvnbhXYnnrLGlbB3.uTEJP9uWuNg9ShhIsiMIowi9Bjv/KZaG",
+    "gender": "Female",
+    "birthdate": "2001-05-21T23:15:30.000Z",
+    "country": "Ukraine",
+    "countryCode": "UA",
+    "createdAt": "2021-11-07T18:58:20.011Z",
+    "updatedAt": "2021-11-07T19:03:03.332Z",
+    "__v": 24
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "796499",
+      "550988",
+      "524434",
+      "568620",
+      "589754",
+      "451048",
+      "617502",
+      "729720",
+      "706972",
+      "588228",
+      "646207",
+      "649409",
+      "522931"
+    ],
+    "visitedSeries": [
+      "113442"
+    ],
+    "visitedActors": [
+      "1309706"
+    ],
+    "averageMovieGenres": [
+      {
+        "count": 11,
+        "id": 28,
+        "name": "Action",
+        "average": 4.91,
+        "movieIDs": [
+          796499,
+          550988,
+          524434,
+          568620,
+          451048,
+          617502,
+          729720,
+          706972,
+          588228,
+          646207,
+          522931
+        ]
+      },
+      {
+        "count": 3,
+        "id": 53,
+        "name": "Thriller",
+        "average": 4.67,
+        "movieIDs": [
+          796499,
+          646207,
+          522931
+        ]
+      },
+      {
+        "count": 7,
+        "id": 35,
+        "name": "Comedy",
+        "average": 4.86,
+        "movieIDs": [
+          796499,
+          550988,
+          589754,
+          451048,
+          617502,
+          729720,
+          522931
+        ]
+      },
+      {
+        "count": 3,
+        "id": 80,
+        "name": "Crime",
+        "average": 5,
+        "movieIDs": [
+          796499,
+          706972,
+          649409
+        ]
+      },
+      {
+        "count": 7,
+        "id": 12,
+        "name": "Adventure",
+        "average": 5,
+        "movieIDs": [
+          550988,
+          524434,
+          568620,
+          589754,
+          451048,
+          588228,
+          646207
+        ]
+      },
+      {
+        "count": 3,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 5,
+        "movieIDs": [
+          550988,
+          524434,
+          588228
+        ]
+      },
+      {
+        "count": 3,
+        "id": 14,
+        "name": "Fantasy",
+        "average": 5,
+        "movieIDs": [
+          524434,
+          589754,
+          451048
+        ]
+      },
+      {
+        "count": 3,
+        "id": 18,
+        "name": "Drama",
+        "average": 5,
+        "movieIDs": [
+          706972,
+          646207,
+          649409
+        ]
+      },
+      {
+        "count": 1,
+        "id": 9648,
+        "name": "Mystery",
+        "average": 5,
+        "movieIDs": [
+          649409
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 796499,
+        "rating": 5
+      },
+      {
+        "movieID": 550988,
+        "rating": 5
+      },
+      {
+        "movieID": 524434,
+        "rating": 5
+      },
+      {
+        "movieID": 568620,
+        "rating": 5
+      },
+      {
+        "movieID": 589754,
+        "rating": 5
+      },
+      {
+        "movieID": 451048,
+        "rating": 5
+      },
+      {
+        "movieID": 617502,
+        "rating": 5
+      },
+      {
+        "movieID": 729720,
+        "rating": 5
+      },
+      {
+        "movieID": 706972,
+        "rating": 5
+      },
+      {
+        "movieID": 588228,
+        "rating": 5
+      },
+      {
+        "movieID": 646207,
+        "rating": 5
+      },
+      {
+        "movieID": 649409,
+        "rating": 5
+      },
+      {
+        "movieID": 522931,
+        "rating": 4
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "618823dc38feab021883d879",
+    "firstname": "Test",
+    "lastname": "Adventure",
+    "email": "test9@gmail.com",
+    "password": "$2a$10$yuEgED2h5rj4w4I8fHCbte9.sLJj7jLmiTyguQSBEkf7uZjWzr9dS",
+    "gender": "Female",
+    "birthdate": "1999-08-21T23:15:30.000Z",
+    "country": "Armenia",
+    "countryCode": "AM",
+    "createdAt": "2021-11-07T19:07:08.311Z",
+    "updatedAt": "2021-11-07T19:10:34.906Z",
+    "__v": 15
+  },
+  {
+    "favouriteMovies": [],
+    "favouriteSeries": [],
+    "visitedMovies": [
+      "580489",
+      "370172",
+      "617653",
+      "571468",
+      "672582",
+      "522931",
+      "385128",
+      "637649"
+    ],
+    "visitedSeries": [],
+    "visitedActors": [],
+    "averageMovieGenres": [
+      {
+        "count": 2,
+        "id": 878,
+        "name": "Science Fiction",
+        "average": 5,
+        "movieIDs": [
+          580489,
+          571468
+        ]
+      },
+      {
+        "count": 7,
+        "id": 28,
+        "name": "Action",
+        "average": 5,
+        "movieIDs": [
+          580489,
+          370172,
+          617653,
+          571468,
+          522931,
+          385128,
+          637649
+        ]
+      },
+      {
+        "count": 3,
+        "id": 12,
+        "name": "Adventure",
+        "average": 5,
+        "movieIDs": [
+          580489,
+          370172,
+          571468
+        ]
+      },
+      {
+        "count": 5,
+        "id": 53,
+        "name": "Thriller",
+        "average": 5,
+        "movieIDs": [
+          370172,
+          617653,
+          522931,
+          385128,
+          637649
+        ]
+      },
+      {
+        "count": 2,
+        "id": 18,
+        "name": "Drama",
+        "average": 5,
+        "movieIDs": [
+          617653,
+          571468
+        ]
+      },
+      {
+        "count": 1,
+        "id": 36,
+        "name": "History",
+        "average": 5,
+        "movieIDs": [
+          617653
+        ]
+      },
+      {
+        "count": 1,
+        "id": 27,
+        "name": "Horror",
+        "average": 2,
+        "movieIDs": [
+          672582
+        ]
+      },
+      {
+        "count": 1,
+        "id": 35,
+        "name": "Comedy",
+        "average": 5,
+        "movieIDs": [
+          522931
+        ]
+      },
+      {
+        "count": 2,
+        "id": 80,
+        "name": "Crime",
+        "average": 5,
+        "movieIDs": [
+          385128,
+          637649
+        ]
+      }
+    ],
+    "averageSeriesGenres": [],
+    "userMovieRatings": [
+      {
+        "movieID": 580489,
+        "rating": 5
+      },
+      {
+        "movieID": 370172,
+        "rating": 5
+      },
+      {
+        "movieID": 617653,
+        "rating": 5
+      },
+      {
+        "movieID": 571468,
+        "rating": 5
+      },
+      {
+        "movieID": 672582,
+        "rating": 2
+      },
+      {
+        "movieID": 522931,
+        "rating": 5
+      },
+      {
+        "movieID": 385128,
+        "rating": 5
+      },
+      {
+        "movieID": 637649,
+        "rating": 5
+      }
+    ],
+    "userSeriesRatings": [],
+    "_id": "618824d938feab021883d8bc",
+    "firstname": "Test",
+    "lastname": "Action",
+    "email": "test10@gmail.com",
+    "password": "$2a$10$6oJsuGmcD1ie66RA8rnPFO389Q8WcosabdWkJnUs9UOegp1yG/zOy",
+    "gender": "Female",
+    "birthdate": "2010-08-21T23:15:30.000Z",
+    "country": "British Indian Ocean Territory",
+    "countryCode": "IO",
+    "createdAt": "2021-11-07T19:11:21.957Z",
+    "updatedAt": "2021-11-07T19:24:40.997Z",
+    "__v": 8,
+    "image": "0BE0667D-AABC-4BD2-8CC3-F78481D584AE.png"
+  }
+]

@@ -21,7 +21,9 @@ router.get('/get-now-playing', movieController.getNowPlaying);
 
 router.get('/search/:query', movieController.searchMovie);
 
-router.post('/favourite', movieController.addToFavourites);
+router.get('/kmeans', movieController.kMeans);
+
+router.post('/set-rating', movieController.setRating);
 
 router.get('/favourite', movieController.getFavourites);
 
