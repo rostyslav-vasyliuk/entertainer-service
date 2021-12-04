@@ -20,7 +20,6 @@ class KMeansEngine {
   validateInput() {
     this.showLog('Validating inputs...');
 
-    // Vectors should be array of objects
     for (let i = 0; i < this.vectors.length; i += 1) {
       const v = this.vectors[i];
 
@@ -29,12 +28,10 @@ class KMeansEngine {
       }
     }
 
-    // Cluster size should be a positive integer
     if (!_.isNumber(this.k) || !Number.isInteger(this.k) || this.k <= 0) {
       throw new Error('Cluster size should be a positive integer');
     }
 
-    // Cluster size should be smaller than the vector size
     if (this.k > this.vectors.length) {
       throw new Error('Cluster size should be smaller than the vector size');
     }
@@ -48,7 +45,6 @@ class KMeansEngine {
       if (!_.isArray(this.initialCentroids) || (this.initialCentroids.length !== this.k)) {
         throw new Error('Initial centroids should be array of length equal to cluster size');
       } else {
-        // Initial centroids  should be array of objects
         for (let i = 0; i < this.initialCentroids.length; i += 1) {
           const c = this.initialCentroids[i];
 
@@ -66,18 +62,15 @@ class KMeansEngine {
     this.iterations = 0;
     this.clusters = [];
 
-    // map to vector object
     this.vectors = this.vectors.map(vector => new Vector(vector));
 
 
     if (this.initialCentroids === undefined) {
       const randNums = KMeansEngine.getRandomSequence(0, this.vectors.length - 1, this.k);
-      // randomly pick a vector to be the centroid
       for (let i = 0; i < this.k; i += 1) {
         this.clusters.push(new Cluster(this.vectors[randNums[i]]));
       }
     } else {
-      // set things up with the initial centroids
       for (let i = 0; i < this.k; i += 1) {
         this.clusters.push(new Cluster(new Vector(this.initialCentroids[i])));
       }
@@ -89,7 +82,6 @@ class KMeansEngine {
   }
 
   static getRandomSequence(min, max, size) {
-    // generate a sequence of non-repeat numbers in the range of 0 to vector.length - 1
     const randNums = [];
 
     while (randNums.length < size) {
@@ -127,13 +119,10 @@ class KMeansEngine {
 
       let hasMoved = false;
 
-      // reset clusters
       for (let i = 0; i < self.clusters.length; i += 1) {
         self.clusters[i].init();
       }
 
-      // for each vector, check which centroid is closest
-      // then assign the vector to the cluster
       for (let i = 0; i < self.vectors.length; i += 1) {
         const vector = self.vectors[i];
 
@@ -156,11 +145,9 @@ class KMeansEngine {
         self.clusters[clusterIndex].addVector(self.userIDs[i], vector);
       }
 
-      // re-calculate the centroids
       for (let i = 0; i < self.clusters.length; i += 1) {
         self.clusters[i].calculateCentroids();
 
-        // check if any centroid hasMoved
         if (self.clusters[i].hasMoved) {
           hasMoved = true;
 

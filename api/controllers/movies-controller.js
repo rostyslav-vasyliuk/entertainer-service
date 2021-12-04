@@ -1,10 +1,7 @@
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/user-model');
-const kmeans = require('../utils/kmeans');
-const { normalizeUserDatasets } = require('../utils/kmeans-normalizer');
-const { getOptimalClustersAmountElbowMethod } = require('../utils/elbow-methob');
-
+const { getRecommendationsCF } = require('../utils/recommendations-engine');
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const getDetails = async (req, res) => {
@@ -222,12 +219,9 @@ const kMeans = async (req, res) => {
 
     const users = await User.find({});
 
-    const { arr, userIDs } = normalizeUserDatasets(users);
-    getOptimalClustersAmountElbowMethod();
-    kmeans.clusterize(arr, userIDs, { k: 4, maxIterations: 5, debug: true }, (err, result) => {
-      // console.table(result);
-      res.status(200).send({ result });
-    });
+    const recommendedMovies = getRecommendationsCF(users, users[0].id);
+
+    res.status(200).send({ result: recommendedMovies });
   } catch (err) {
     console.log(err.message)
     res.status(500).json(err);

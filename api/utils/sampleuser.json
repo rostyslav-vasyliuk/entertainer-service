@@ -22,7 +22,6 @@
     "averageMovieGenres": [
       {
         "count": 5,
-        "id": 28,
         "name": "Action",
         "average": 3.6,
         "movieIDs": [
@@ -35,7 +34,6 @@
       },
       {
         "count": 3,
-        "id": 12,
         "name": "Adventure",
         "average": 3.67,
         "movieIDs": [
@@ -46,7 +44,6 @@
       },
       {
         "count": 1,
-        "id": 18,
         "name": "Drama",
         "average": 5,
         "movieIDs": [
@@ -239,7 +236,6 @@
       },
       {
         "count": 5,
-        "id": 12,
         "name": "Adventure",
         "average": 2.6,
         "movieIDs": [
@@ -252,7 +248,6 @@
       },
       {
         "count": 2,
-        "id": 878,
         "name": "Science Fiction",
         "average": 3.5,
         "movieIDs": [
@@ -262,7 +257,6 @@
       },
       {
         "count": 3,
-        "id": 14,
         "name": "Fantasy",
         "average": 2.67,
         "movieIDs": [
