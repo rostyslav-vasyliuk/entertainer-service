@@ -17,4 +17,6 @@ router.post('/favourite', tvSeriesController.addToFavourites);
 
 router.get('/favourite', tvSeriesController.getFavourites);
 
+router.post('/set-rating', tvSeriesController.setRating);
+
 module.exports = router;

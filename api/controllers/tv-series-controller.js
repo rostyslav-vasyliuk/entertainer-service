@@ -20,8 +20,8 @@ const getDetails = async (req, res) => {
 
     user.save();
 
-    // const isFavourite = user.favouriteSeries.findIndex((elem) => JSON.parse(elem).id == id);
-    // data.data.isFavourite = (isFavourite === -1 ? false : true);
+    const seriesRating = user.userSeriesRatings.find((elem) => elem.seriesID == id);
+    data.data.userRating = seriesRating ? seriesRating.rating : null;
 
     res.send(data.data);
   } catch (err) {
@@ -113,6 +113,77 @@ const addToFavourites = async (req, res) => {
   }
 };
 
+const setRating = async (req, res) => {
+  try {
+    const { seriesRating, genres, seriesID } = req.body;
+    const token = req.headers['access-token'];
+    const decoded = jwt.decode(token);
+    const user = await User.findById(decoded.id);
+
+    const { userSeriesRatings, averageSeriesGenres } = user;
+    let outdatedRatingValue = null;
+    const ratingIndex = userSeriesRatings.findIndex((elem) => elem.seriesID === seriesID);
+
+    if (ratingIndex === -1) {
+      userSeriesRatings.push({
+        seriesID,
+        rating: seriesRating,
+      });
+    } else {
+      outdatedRatingValue = userSeriesRatings[ratingIndex].rating;
+      userSeriesRatings[ratingIndex].rating = seriesRating;
+    }
+
+    genres.forEach((genre) => {
+      const dbAverageGenreIndex = averageSeriesGenres.findIndex((dbAvg) => dbAvg.id === genre.id);
+      if (dbAverageGenreIndex === -1) {
+        averageSeriesGenres.push(
+          {
+            count: 1,
+            id: genre.id,
+            name: genre.name,
+            average: seriesRating,
+            seriesIDs: [seriesID],
+          });
+      } else if (averageSeriesGenres[dbAverageGenreIndex].count === 1 && averageSeriesGenres[dbAverageGenreIndex].seriesIDs.includes(seriesID)) {
+        averageSeriesGenres[dbAverageGenreIndex] = {
+          ...averageSeriesGenres[dbAverageGenreIndex],
+          average: seriesRating,
+        }
+      } else {
+        if (averageSeriesGenres[dbAverageGenreIndex].seriesIDs.includes(seriesID)) {
+          let currentCount = averageSeriesGenres[dbAverageGenreIndex].count;
+          const currentAvg = averageSeriesGenres[dbAverageGenreIndex].average;
+          let currentSum = currentCount * currentAvg;
+          currentSum -= outdatedRatingValue;
+          currentCount -= 1;
+
+          averageSeriesGenres[dbAverageGenreIndex].count = currentCount;
+          averageSeriesGenres[dbAverageGenreIndex].average = Number((currentSum / currentCount).toFixed(2));
+          averageSeriesGenres[dbAverageGenreIndex].seriesIDs = averageSeriesGenres[dbAverageGenreIndex].seriesIDs.filter((el) => el !== seriesID);
+        }
+
+        averageSeriesGenres[dbAverageGenreIndex] = {
+          ...averageSeriesGenres[dbAverageGenreIndex],
+          count: averageSeriesGenres[dbAverageGenreIndex].count + 1,
+          average: Number(
+            ((averageSeriesGenres[dbAverageGenreIndex].average * averageSeriesGenres[dbAverageGenreIndex].count + seriesRating) /
+              (averageSeriesGenres[dbAverageGenreIndex].count + 1)).toFixed(2),
+          ),
+          seriesIDs: [...averageSeriesGenres[dbAverageGenreIndex].seriesIDs, seriesID],
+        };
+      }
+    });
+
+    await User.findByIdAndUpdate(decoded.id, { userSeriesRatings, averageSeriesGenres });
+
+    res.status(200).send({});
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json(err);
+  }
+};
+
 const getFavourites = async (req, res) => {
   try {
     const token = req.headers['access-token'];
@@ -134,5 +205,6 @@ module.exports = {
   getRecomendations,
   getTopByGenre,
   addToFavourites,
-  getFavourites
+  getFavourites,
+  setRating,
 };
